@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityRegistrarUsuario">
+    tools:context=".ActivityRegistrarUsuario"
+    android:orientation="vertical">
 
+
+    <TextView
+        android:id="@+id/tvCadastreSeuUsuario"
+        android:layout_width="246dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="32dp"
+        android:text="Cadastro Usuario Administrador"
+        android:textSize="24dp"
+        app:layout_constraintStart_toStartOf="@+id/etEntradaemail"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etEntradaNomeUsuario"
@@ -16,8 +27,8 @@
         android:layout_marginTop="28dp"
         android:background="#19000000"
         android:ems="10"
+        android:inputType="textPersonName"
         android:hint="Digite seu nome"
-        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="@+id/tvCadastreSeuUsuario"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +47,14 @@
         android:inputType="textEmailAddress"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etEntradaNomeUsuario" />
+
+    <Spinner
+        android:id="@+id/spinnerEmpresa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:imeOptions="actionNext"
+        android:visibility="invisible" />
+
 
     <EditText
         android:id="@+id/etEntradasenha"
@@ -68,16 +87,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etEntradasenha" />
 
-    <TextView
-        android:id="@+id/tvCadastreSeuUsuario"
-        android:layout_width="246dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="32dp"
-        android:text="Cadastro Usuario Administrador"
-        android:textSize="24dp"
-        app:layout_constraintStart_toStartOf="@+id/etEntradaemail"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/btnFinalizarCadastro"
         android:layout_width="wrap_content"
@@ -99,4 +108,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

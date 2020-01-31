@@ -7,39 +7,33 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class CadastroService extends AsyncTask<String, Void, String>
-{
+public class OrganizacaoService extends AsyncTask<String, Void, String> {
+
 
     @Override
-    protected String doInBackground(String... strings)
-    {
+    protected String doInBackground(String... strings) {
 
-        String urlWS = "http://172.30.248.32:8080/ReservaDeSala/rest/usuario/cadastro/";
+        String urlWS = "http://172.30.248.32:8080/ReservaDeSala/rest/organizacao/organizacoesByDominio";
 
         StringBuilder result = new StringBuilder();
-        try
-        {
+        try {
             URL url = new URL(urlWS);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("authorization", "secret");
-            conn.setRequestProperty("novoUsuario", strings[0]);
-            conn.setConnectTimeout(2000);
+            conn.setRequestProperty("dominio", strings[0]);
+            conn.setConnectTimeout(5000);
 
             BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String line;
-            while ((line = rd.readLine()) != null)
-            {
+            while ((line = rd.readLine()) != null) {
                 result.append(line);
             }
             rd.close();
-            System.out.println("deu boa");
+            System.out.println(result.toString());
             return result.toString();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("deu ruim");
         }
         return result.toString();
     }

@@ -14,24 +14,24 @@ public class ActivityTelaInicial extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tela_inicial);
         Button botaobotao = (Button) findViewById(R.id.button);
-        botaobotao.setOnClickListener((new View.OnClickListener(){
-            public void onClick(View v){
+        botaobotao.setOnClickListener((new View.OnClickListener() {
+            public void onClick(View v) {
                 Intent it = new Intent(ActivityTelaInicial.this, ActivityTelaPrincipal.class);
                 startActivity(it);
             }
         }));
         //comando para chamar a outra tela
         Button botaoRegistra = (Button) findViewById(R.id.btnRegistrar);
-        botaoRegistra.setOnClickListener((new View.OnClickListener(){
-            public void onClick(View v){
+        botaoRegistra.setOnClickListener((new View.OnClickListener() {
+            public void onClick(View v) {
                 Intent it = new Intent(ActivityTelaInicial.this, ActivityRegistrarUsuario.class);
                 startActivity(it);
             }
         }));
 
         Button botaoLogin = (Button) findViewById(R.id.btnLogin);
-        botaoLogin.setOnClickListener((new View.OnClickListener(){
-            public void onClick(View v){
+        botaoLogin.setOnClickListener((new View.OnClickListener() {
+            public void onClick(View v) {
                 Intent it = new Intent(ActivityTelaInicial.this, ActivityTelaLogin.class);
                 startActivity(it);
 

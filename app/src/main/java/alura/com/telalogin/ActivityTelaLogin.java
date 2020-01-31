@@ -23,8 +23,8 @@ public class ActivityTelaLogin extends AppCompatActivity {
         final Button botaoEntrar = findViewById(R.id.btnEntrar);
 
         Button botaoVoltar = (Button) findViewById(R.id.btnVoltar);
-        botaoVoltar.setOnClickListener((new View.OnClickListener(){
-            public void onClick(View v){
+        botaoVoltar.setOnClickListener((new View.OnClickListener() {
+            public void onClick(View v) {
                 Intent it = new Intent(ActivityTelaLogin.this, ActivityTelaInicial.class);
                 startActivity(it);
             }
@@ -50,17 +50,7 @@ public class ActivityTelaLogin extends AppCompatActivity {
                 }
 
             }
-        }/*{
-            @Override
-            public void onClick(View v) {
-                try {
-                    String emailString = entradaEmail.getText().toString().trim();
-                    String senhaString = entradaSenha.getText().toString().trim();
-
-                    exibirMensagem(new LoginService().execute(emailString, senhaString).get());
-                }
-            }
-        }*/);
+        });
     }
 
 

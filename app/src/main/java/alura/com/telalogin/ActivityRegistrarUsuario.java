@@ -6,20 +6,30 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import alura.com.services.CadastroService;
-import alura.com.services.ServiceDominio;
+import alura.com.services.RegistrarService;
+import alura.com.services.OrganizacaoService;
+import alura.com.telalogin.modelo.Organizacao;
 
 public class ActivityRegistrarUsuario extends AppCompatActivity {
+    List<Organizacao> listaDeOrganizacoes = new ArrayList();
+    List<String> listaDeNomesOrganizacoes = new ArrayList<>();
+    int idOrganizacaoSelecionada;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +40,20 @@ public class ActivityRegistrarUsuario extends AppCompatActivity {
         final EditText entradaSenha = findViewById(R.id.etEntradasenha);
         final EditText entradaConfirmaSenha = findViewById(R.id.etEntradaConfirmaSenha);
         final Button botaoFinalizarCadastro = findViewById(R.id.btnFinalizarCadastro);
+        final Spinner spinner = findViewById(R.id.spinnerEmpresa);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                idOrganizacaoSelecionada=listaDeOrganizacoes.get(position).getId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
         Button botaoVoltar = findViewById(R.id.btnVoltar);
-        botaoVoltar.setOnClickListener((new View.OnClickListener(){
-            public void onClick(View v){
+        botaoVoltar.setOnClickListener((new View.OnClickListener() {
+            public void onClick(View v) {
                 Intent it = new Intent(ActivityRegistrarUsuario.this, ActivityTelaInicial.class);
                 startActivity(it);
             }
@@ -41,8 +62,8 @@ public class ActivityRegistrarUsuario extends AppCompatActivity {
         botaoFinalizarCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                botaoFinalizarCadastro.setOnClickListener((new View.OnClickListener(){
-                    public void onClick(View v){
+                botaoFinalizarCadastro.setOnClickListener((new View.OnClickListener() {
+                    public void onClick(View v) {
                         Intent it = new Intent(ActivityRegistrarUsuario.this, ActivityTelaInicial.class);
                         startActivity(it);
                     }
@@ -57,12 +78,13 @@ public class ActivityRegistrarUsuario extends AppCompatActivity {
                     usuarioJson.put("email", emailString);
                     usuarioJson.put("nome", nomeString);
                     usuarioJson.put("senha", senhaString);
+                    usuarioJson.put("idOrganizacao", idOrganizacaoSelecionada);
 
                     String novoUsuarioDecode;
                     String userCod = new String(Base64.encodeToString(usuarioJson.toString().getBytes("UTF-8"), Base64.NO_WRAP));
                     System.out.println(usuarioJson.toString());
 
-                    exibirMensagem(new CadastroService().execute(userCod).get());
+                    exibirMensagem(new RegistrarService().execute(userCod).get());
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -86,15 +108,20 @@ public class ActivityRegistrarUsuario extends AppCompatActivity {
                             String dominio = emailCompleto[1];
                             if (dominio.contains(".")) {
                                 try {
-                                    String listaOrganizacao = new ServiceDominio().execute(dominio).get();
+                                    String listaOrganizacao = new OrganizacaoService().execute(dominio).get();
                                     System.out.println("dominio: " + dominio);
-                                    System.out.println("dominio retorno " + listaOrganizacao);
+                                    System.out.println("organizacoes retornadas " + listaOrganizacao);
+
+                                    if (listaOrganizacao.length() == 0) {
+                                        exibirMensagem("O dominio do email informado nao faz parte de nenhuma organizacao");
+                                    } else {
+                                        parseOrganizacoesArray(listaOrganizacao, spinner);
+                                    }
                                 } catch (ExecutionException e) {
                                     e.printStackTrace();
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
-                                System.out.println(dominio);
 
                             }
                         }
@@ -108,4 +135,37 @@ public class ActivityRegistrarUsuario extends AppCompatActivity {
     public void exibirMensagem(String mensagem) {
         Toast.makeText(this, mensagem, Toast.LENGTH_LONG).show();
     }
+
+    public void parseOrganizacoesArray(String organizacoesString, Spinner spinner) {
+        try {
+            JSONArray jsonArray = new JSONArray(organizacoesString);
+            if (jsonArray.length() > 0) {
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject obj = jsonArray.getJSONObject(i);
+
+                    if (obj.has("id") && obj.has("nome") && obj.has("tipoOrganizacao")) {
+
+                        int id = obj.getInt("id");
+                        String nome = obj.getString("nome");
+                        String tipoOrganizacao = obj.getString("tipoOrganizacao");
+                        Organizacao novaOrganizacao = new Organizacao();
+                        novaOrganizacao.setId(id);
+                        novaOrganizacao.setNome(nome);
+                        novaOrganizacao.setTipoOrganizacao(tipoOrganizacao);
+
+                        listaDeOrganizacoes.add(novaOrganizacao);
+                        listaDeNomesOrganizacoes.add(novaOrganizacao.getNome() + " - " + novaOrganizacao.getTipoOrganizacao());
+
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(ActivityRegistrarUsuario.this, android.R.layout.simple_spinner_item, listaDeNomesOrganizacoes);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinner.setAdapter(adapter);
+                        spinner.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
