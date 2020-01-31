@@ -30,12 +30,23 @@ public class ActivityRegistrarUsuario extends AppCompatActivity {
         final EditText entradaSenha = findViewById(R.id.etEntradasenha);
         final EditText entradaConfirmaSenha = findViewById(R.id.etEntradaConfirmaSenha);
         final Button botaoFinalizarCadastro = findViewById(R.id.btnFinalizarCadastro);
-
+        Button botaoVoltar = findViewById(R.id.btnVoltar);
+        botaoVoltar.setOnClickListener((new View.OnClickListener(){
+            public void onClick(View v){
+                Intent it = new Intent(ActivityRegistrarUsuario.this, ActivityTelaInicial.class);
+                startActivity(it);
+            }
+        }));
 
         botaoFinalizarCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                botaoFinalizarCadastro.setOnClickListener((new View.OnClickListener(){
+                    public void onClick(View v){
+                        Intent it = new Intent(ActivityRegistrarUsuario.this, ActivityTelaInicial.class);
+                        startActivity(it);
+                    }
+                }));
 
                 JSONObject usuarioJson = new JSONObject();
 
@@ -61,6 +72,7 @@ public class ActivityRegistrarUsuario extends AppCompatActivity {
 
                 }
             }
+
         });
 
         entradaEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
