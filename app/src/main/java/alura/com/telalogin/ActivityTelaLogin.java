@@ -29,6 +29,15 @@ public class ActivityTelaLogin extends AppCompatActivity {
                 startActivity(it);
             }
         }));
+        Button botaoheu = (Button) findViewById(R.id.heuheu);
+        botaoheu.setOnClickListener((new View.OnClickListener() {
+            //botao atalho pra tela de usuario logado
+            public void onClick(View v) {
+                Intent it = new Intent(ActivityTelaLogin.this, ActivityTelaPrincipal.class);
+                startActivity(it);
+            }
+        }));
+
 
         botaoEntrar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -42,9 +51,11 @@ public class ActivityTelaLogin extends AppCompatActivity {
                         entradaEmail.setError("o campo email é obrigatorio");
                     else if (TextUtils.isEmpty(senhaString))
                         entradaSenha.setError("o campo senha é obrigatorio");
-                    else
+                    else {
                         exibirMensagem(new LoginService().execute(emailString, senhaString).get());
-
+                        Intent it = new Intent(ActivityTelaLogin.this, ActivityTelaPrincipal.class);
+                        startActivity(it);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

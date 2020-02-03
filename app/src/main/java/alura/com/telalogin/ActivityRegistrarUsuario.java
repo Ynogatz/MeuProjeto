@@ -38,7 +38,6 @@ public class ActivityRegistrarUsuario extends AppCompatActivity {
         final EditText entradaNome = findViewById(R.id.etEntradaNomeUsuario);
         final EditText entradaEmail = findViewById(R.id.etEntradaemail);
         final EditText entradaSenha = findViewById(R.id.etEntradasenha);
-        final EditText entradaConfirmaSenha = findViewById(R.id.etEntradaConfirmaSenha);
         final Button botaoFinalizarCadastro = findViewById(R.id.btnFinalizarCadastro);
         final Spinner spinner = findViewById(R.id.spinnerEmpresa);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -62,12 +61,6 @@ public class ActivityRegistrarUsuario extends AppCompatActivity {
         botaoFinalizarCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                botaoFinalizarCadastro.setOnClickListener((new View.OnClickListener() {
-                    public void onClick(View v) {
-                        Intent it = new Intent(ActivityRegistrarUsuario.this, ActivityTelaInicial.class);
-                        startActivity(it);
-                    }
-                }));
 
                 JSONObject usuarioJson = new JSONObject();
 
@@ -84,19 +77,22 @@ public class ActivityRegistrarUsuario extends AppCompatActivity {
                     String userCod = new String(Base64.encodeToString(usuarioJson.toString().getBytes("UTF-8"), Base64.NO_WRAP));
                     System.out.println(usuarioJson.toString());
 
-                    exibirMensagem(new RegistrarService().execute(userCod).get());
+                    Toast.makeText(ActivityRegistrarUsuario.this, new RegistrarService().execute(userCod).get(), Toast.LENGTH_SHORT).show();
 
-                } catch (JSONException e) {
+                } catch (
+                        JSONException e) {
                     e.printStackTrace();
-                } catch (UnsupportedEncodingException e) {
+                } catch (
+                        UnsupportedEncodingException e) {
                     e.printStackTrace();
-                } catch (Exception e) {
+                } catch (
+                        Exception e) {
 
                 }
+                Intent it = new Intent(ActivityRegistrarUsuario.this, ActivityTelaLogin.class);
+                startActivity(it);
             }
-
         });
-
         entradaEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -113,7 +109,7 @@ public class ActivityRegistrarUsuario extends AppCompatActivity {
                                     System.out.println("organizacoes retornadas " + listaOrganizacao);
 
                                     if (listaOrganizacao.length() == 0) {
-                                        exibirMensagem("O dominio do email informado nao faz parte de nenhuma organizacao");
+                                        Toast.makeText(ActivityRegistrarUsuario.this, "O dominio do email informado nao faz parte de nenhuma organizacao", Toast.LENGTH_SHORT).show();
                                     } else {
                                         parseOrganizacoesArray(listaOrganizacao, spinner);
                                     }
@@ -131,11 +127,6 @@ public class ActivityRegistrarUsuario extends AppCompatActivity {
             }
         });
     }
-
-    public void exibirMensagem(String mensagem) {
-        Toast.makeText(this, mensagem, Toast.LENGTH_LONG).show();
-    }
-
     public void parseOrganizacoesArray(String organizacoesString, Spinner spinner) {
         try {
             JSONArray jsonArray = new JSONArray(organizacoesString);

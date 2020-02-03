@@ -22,7 +22,7 @@ public class OrganizacaoService extends AsyncTask<String, Void, String> {
             conn.setRequestMethod("GET");
             conn.setRequestProperty("authorization", "secret");
             conn.setRequestProperty("dominio", strings[0]);
-            conn.setConnectTimeout(5000);
+            conn.setConnectTimeout(1500);
 
             BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String line;

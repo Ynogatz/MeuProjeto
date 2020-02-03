@@ -24,7 +24,7 @@ public class RegistrarService extends AsyncTask<String, Void, String>
             conn.setRequestMethod("POST");
             conn.setRequestProperty("authorization", "secret");
             conn.setRequestProperty("novoUsuario", strings[0]);
-            conn.setConnectTimeout(5000);
+            conn.setConnectTimeout(1500);
 
             BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String line;

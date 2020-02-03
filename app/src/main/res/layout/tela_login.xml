@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/ivTelaLogin"
-        android:layout_width="302dp"
-        android:layout_height="272dp"
+        android:layout_width="312dp"
+        android:layout_height="288dp"
         android:layout_marginLeft="28dp"
         android:layout_marginRight="28dp"
         app:layout_constraintBottom_toTopOf="@+id/etLogin"
@@ -59,11 +59,20 @@
         android:id="@+id/btnVoltar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
         android:text="VOLTAR"
+        app:layout_constraintBottom_toTopOf="@+id/heuheu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/heuheu"
+        android:layout_width="412dp"
+        android:layout_height="61dp"
+        android:background="#00000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 
