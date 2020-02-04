@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ActivityTelaPrincipal"></activity>
+        <activity android:name=".ActivityTelaReservarSala"></activity>
+        <activity android:name=".ActivityTelaPrincipal" />
         <activity android:name=".ActivityTelaLogin" />
         <activity android:name=".ActivityRegistrarUsuario" />
         <activity android:name=".ActivityTelaInicial">

@@ -2,7 +2,9 @@ package alura.com.telalogin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,10 +17,16 @@ import java.security.Principal;
 import alura.com.services.LoginService;
 
 public class ActivityTelaLogin extends AppCompatActivity {
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        prefs = getSharedPreferences("USER_DATA", Context.MODE_PRIVATE);
+//        if(prefs.contains("email")){
+//            Intent it = new Intent(ActivityTelaLogin.this, ActivityTelaPrincipal.class);
+//            startActivity(it);
+//        }
         setContentView(R.layout.tela_login);
         final Button botaoEntrar = findViewById(R.id.btnEntrar);
 
@@ -38,7 +46,6 @@ public class ActivityTelaLogin extends AppCompatActivity {
             }
         }));
 
-
         botaoEntrar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
@@ -52,18 +59,32 @@ public class ActivityTelaLogin extends AppCompatActivity {
                     else if (TextUtils.isEmpty(senhaString))
                         entradaSenha.setError("o campo senha é obrigatorio");
                     else {
-                        exibirMensagem(new LoginService().execute(emailString, senhaString).get());
-                        Intent it = new Intent(ActivityTelaLogin.this, ActivityTelaPrincipal.class);
-                        startActivity(it);
+                        String loginReturn = new LoginService().execute(emailString, senhaString).get();
+                        if (loginReturn.equals("Login efetuado com sucesso!")) {
+
+
+                            prefs = getSharedPreferences("USER_DATA",
+                                    Context.MODE_PRIVATE);
+                            SharedPreferences.Editor ed = prefs.edit();
+
+                            ed.putString("email", emailString);
+                            ed.commit();
+                            String emailRecuperado = prefs.getString("email", null);
+                            System.out.println("email recuperado : " + emailRecuperado);
+
+                            exibirMensagem(loginReturn);
+                            Intent it = new Intent(ActivityTelaLogin.this, ActivityTelaPrincipal.class);
+                            startActivity(it);
+                        } else {
+                            exibirMensagem(loginReturn);
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
         });
     }
-
 
     public void exibirMensagem(String mensagem) {
         Toast.makeText(this, mensagem, Toast.LENGTH_LONG).show();
