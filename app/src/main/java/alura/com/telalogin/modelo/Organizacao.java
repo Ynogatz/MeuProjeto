@@ -1,9 +1,9 @@
 package alura.com.telalogin.modelo;
 
 public class Organizacao {
-    int id;
-    String nome;
-    String tipoOrganizacao;
+    private int id;
+    private String nome;
+    private String tipoOrganizacao;
 
     public int getId() {
         return id;

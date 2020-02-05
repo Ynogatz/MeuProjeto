@@ -26,7 +26,7 @@ import alura.com.services.RegistrarService;
 import alura.com.services.OrganizacaoService;
 import alura.com.telalogin.modelo.Organizacao;
 
-public class ActivityRegistrarUsuario extends AppCompatActivity {
+public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
     List<Organizacao> listaDeOrganizacoes = new ArrayList();
     List<String> listaDeNomesOrganizacoes = new ArrayList<>();
     int idOrganizacaoSelecionada;
@@ -53,7 +53,7 @@ public class ActivityRegistrarUsuario extends AppCompatActivity {
         Button botaoVoltar = findViewById(R.id.btnVoltar);
         botaoVoltar.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
-                Intent it = new Intent(ActivityRegistrarUsuario.this, ActivityTelaInicial.class);
+                Intent it = new Intent(ActivityTelaRegistrarUsuario.this, ActivityTelaInicial.class);
                 startActivity(it);
             }
         }));
@@ -75,9 +75,8 @@ public class ActivityRegistrarUsuario extends AppCompatActivity {
 
                     String novoUsuarioDecode;
                     String userCod = new String(Base64.encodeToString(usuarioJson.toString().getBytes("UTF-8"), Base64.NO_WRAP));
-                    System.out.println(usuarioJson.toString());
 
-                    Toast.makeText(ActivityRegistrarUsuario.this, new RegistrarService().execute(userCod).get(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ActivityTelaRegistrarUsuario.this, new RegistrarService().execute(userCod).get(), Toast.LENGTH_SHORT).show();
 
                 } catch (
                         JSONException e) {
@@ -89,7 +88,7 @@ public class ActivityRegistrarUsuario extends AppCompatActivity {
                         Exception e) {
 
                 }
-                Intent it = new Intent(ActivityRegistrarUsuario.this, ActivityTelaLogin.class);
+                Intent it = new Intent(ActivityTelaRegistrarUsuario.this, ActivityTelaInicial.class);
                 startActivity(it);
             }
         });
@@ -109,7 +108,7 @@ public class ActivityRegistrarUsuario extends AppCompatActivity {
                                     System.out.println("organizacoes retornadas " + listaOrganizacao);
 
                                     if (listaOrganizacao.length() == 0) {
-                                        Toast.makeText(ActivityRegistrarUsuario.this, "O dominio do email informado nao faz parte de nenhuma organizacao", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ActivityTelaRegistrarUsuario.this, "O dominio do email informado nao faz parte de nenhuma organizacao", Toast.LENGTH_SHORT).show();
                                     } else {
                                         parseOrganizacoesArray(listaOrganizacao, spinner);
                                     }
@@ -147,7 +146,7 @@ public class ActivityRegistrarUsuario extends AppCompatActivity {
                         listaDeOrganizacoes.add(novaOrganizacao);
                         listaDeNomesOrganizacoes.add(novaOrganizacao.getNome() + " - " + novaOrganizacao.getTipoOrganizacao());
 
-                        ArrayAdapter<String> adapter = new ArrayAdapter<>(ActivityRegistrarUsuario.this, android.R.layout.simple_spinner_item, listaDeNomesOrganizacoes);
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(ActivityTelaRegistrarUsuario.this, android.R.layout.simple_spinner_item, listaDeNomesOrganizacoes);
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spinner.setAdapter(adapter);
                         spinner.setVisibility(View.VISIBLE);

@@ -7,33 +7,38 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class RegistrarService extends AsyncTask<String, Void, String> {
+public class SalaService extends AsyncTask<String, Void, String>
+{
 
     @Override
-    protected String doInBackground(String... strings) {
+    protected String doInBackground(String... strings)
+    {
 
-        String urlWS = "http://172.30.248.32:8080/ReservaDeSala/rest/usuario/cadastro/";
+        String urlWS = "http://172.30.248.32:8080/ReservaDeSala/rest/sala/salas";
 
         StringBuilder result = new StringBuilder();
-        try {
+        try
+        {
             URL url = new URL(urlWS);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
+            conn.setRequestMethod("GET");
             conn.setRequestProperty("authorization", "secret");
-            conn.setRequestProperty("novoUsuario", strings[0]);
-            conn.setConnectTimeout(1500);
+            conn.setRequestProperty("id_organizacao", strings[0]);
+            conn.setConnectTimeout(3000);
 
             BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String line;
-            while ((line = rd.readLine()) != null) {
+            while ((line = rd.readLine()) != null)
+            {
                 result.append(line);
             }
             rd.close();
-            System.out.println("deu boa");
+            System.out.println(result.toString());
             return result.toString();
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
-            System.out.println("deu ruim");
         }
         return result.toString();
     }

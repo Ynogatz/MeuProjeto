@@ -34,7 +34,7 @@ public class ActivityTelaInicial extends AppCompatActivity {
         Button botaoRegistra = (Button) findViewById(R.id.btnRegistrar);
         botaoRegistra.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
-                Intent it = new Intent(ActivityTelaInicial.this, ActivityRegistrarUsuario.class);
+                Intent it = new Intent(ActivityTelaInicial.this, ActivityTelaRegistrarUsuario.class);
                 startActivity(it);
             }
         }));
