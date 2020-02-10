@@ -3,6 +3,16 @@ package alura.com.telalogin.modelo;
 public class Sala {
     private int id;
     private String nome;
+    private int quantidadePessoasSentadas;
+
+    public int getQuantidadePessoasSentadas() {
+        return quantidadePessoasSentadas;
+    }
+
+    public void setQuantidadePessoasSentadas(int quantidadePessoasSentadas) {
+        this.quantidadePessoasSentadas = quantidadePessoasSentadas;
+    }
+
 
     public int getId() {
         return id;

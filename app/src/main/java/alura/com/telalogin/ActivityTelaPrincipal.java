@@ -28,6 +28,8 @@ public class ActivityTelaPrincipal extends AppCompatActivity {
     List<Sala> listaDeSalas = new ArrayList<>();
     List<String> listaDeNomes = new ArrayList<>();
     List<Integer> listaDeId = new ArrayList<>();
+    List<Integer> listaQuantidadePessoasSentadas = new ArrayList<>();
+
 
 
     @Override
@@ -61,19 +63,30 @@ public class ActivityTelaPrincipal extends AppCompatActivity {
             if (salasReturn.length() > 2) {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject obj = jsonArray.getJSONObject(i);
-                    if (obj.has("id") && obj.has("nome")) {
+                    if (obj.has("id") && obj.has("nome") && obj.has("quantidadePessoasSentadas")) {
                         int id = obj.getInt("id");
                         String nome = obj.getString("nome");
+                        int quantidadePessoasSentadas = obj.getInt("quantidadePessoasSentadas");
                         Sala novaSala = new Sala();
                         novaSala.setId(id);
                         novaSala.setNome(nome);
+                        novaSala.setQuantidadePessoasSentadas(quantidadePessoasSentadas);
                         listaDeSalas.add(novaSala);
                         listaDeNomes.add(novaSala.getNome());
                         listaDeId.add(novaSala.getId());
+                        listaQuantidadePessoasSentadas.add(novaSala.getQuantidadePessoasSentadas());
+
 
 
                     }
                 }
+                System.out.println("excelente");
+                System.out.println(listaDeNomes);
+                System.out.println(listaDeId);
+                System.out.println(listaDeSalas);
+                System.out.println(listaQuantidadePessoasSentadas);
+
+                System.out.println("excelente");
                 ListView listview = findViewById(R.id.listview_lista_salas);
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(ActivityTelaPrincipal.this, android.R.layout.simple_list_item_1, listaDeNomes);
                 listview.setAdapter(adapter);
