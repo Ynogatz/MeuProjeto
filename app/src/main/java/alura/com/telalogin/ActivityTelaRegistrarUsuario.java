@@ -126,6 +126,7 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
             }
         });
     }
+
     public void parseOrganizacoesArray(String organizacoesString, Spinner spinner) {
         try {
             JSONArray jsonArray = new JSONArray(organizacoesString);

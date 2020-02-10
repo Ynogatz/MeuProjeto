@@ -5,43 +5,40 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+
+
+
+import androidx.appcompat.app.AppCompatActivity;
+
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import java.util.ArrayList;
+import java.util.List;
 
 import alura.com.services.SalaService;
 import alura.com.telalogin.modelo.Sala;
 
 public class ActivityTelaPrincipal extends AppCompatActivity {
     SharedPreferences prefs;
+    List<Sala> listaDeSalas = new ArrayList<>();
+    List<String> listaDeNomes = new ArrayList<>();
+    List<Integer> listaDeId = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tela_principal);
         prefs = getSharedPreferences("USER_DATA", Context.MODE_PRIVATE);
-        FloatingActionButton addReserva = (FloatingActionButton) findViewById(R.id.fabAddReserva);
-        try {
-            String loginReturn = new SalaService().execute("1").get();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        addReserva.setOnClickListener((new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent it = new Intent(ActivityTelaPrincipal.this, ActivityTelaReservarSala.class);
-                startActivity(it);
-            }
-        }));
         Button botaoLogout = (Button) findViewById(R.id.btnLogout);
         botaoLogout.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
-
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.remove("userEmail");
                 editor.remove("userName");
@@ -55,6 +52,45 @@ public class ActivityTelaPrincipal extends AppCompatActivity {
             }
         }));
 
+        try {
+            prefs = getSharedPreferences("USER_DATA", Context.MODE_PRIVATE);
+            String salasReturn = new SalaService().execute(prefs.getString("userIdOrganizacao", null)).get();
+            System.out.println(salasReturn);
+            JSONArray jsonArray = new JSONArray(salasReturn);
+
+            if (salasReturn.length() > 2) {
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject obj = jsonArray.getJSONObject(i);
+                    if (obj.has("id") && obj.has("nome")) {
+                        int id = obj.getInt("id");
+                        String nome = obj.getString("nome");
+                        Sala novaSala = new Sala();
+                        novaSala.setId(id);
+                        novaSala.setNome(nome);
+                        listaDeSalas.add(novaSala);
+                        listaDeNomes.add(novaSala.getNome());
+                        listaDeId.add(novaSala.getId());
+
+
+                    }
+                }
+                ListView listview = findViewById(R.id.listview_lista_salas);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(ActivityTelaPrincipal.this, android.R.layout.simple_list_item_1, listaDeNomes);
+                listview.setAdapter(adapter);
+                super.onCreate(savedInstanceState);
+                setContentView(R.layout.listview_lista_de_salas);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }
+
+
+
+
+
+
 

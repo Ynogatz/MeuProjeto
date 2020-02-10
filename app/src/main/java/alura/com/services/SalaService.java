@@ -14,7 +14,7 @@ public class SalaService extends AsyncTask<String, Void, String>
     protected String doInBackground(String... strings)
     {
 
-        String urlWS = "http://172.30.248.32:8080/ReservaDeSala/rest/sala/salas";
+        String urlWS = "http://192.168.100.132:8080/ReservaDeSala/rest/sala/salas";
 
         StringBuilder result = new StringBuilder();
         try

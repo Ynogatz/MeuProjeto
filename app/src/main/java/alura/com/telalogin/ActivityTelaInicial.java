@@ -23,13 +23,6 @@ public class ActivityTelaInicial extends AppCompatActivity {
         }
 
         setContentView(R.layout.tela_inicial);
-//        Button botaobotao = (Button) findViewById(R.id.button);
-//        botaobotao.setOnClickListener((new View.OnClickListener() {
-//            public void onClick(View v) {
-//                Intent it = new Intent(ActivityTelaInicial.this, ActivityTelaPrincipal.class);
-//                startActivity(it);
-//            }
-//        }));
         //comando para chamar a outra tela
         Button botaoRegistra = (Button) findViewById(R.id.btnRegistrar);
         botaoRegistra.setOnClickListener((new View.OnClickListener() {

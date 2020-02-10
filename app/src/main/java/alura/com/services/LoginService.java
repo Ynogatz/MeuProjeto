@@ -14,7 +14,7 @@ public class LoginService extends AsyncTask<String, Void, String>
     protected String doInBackground(String... strings)
     {
 
-        String urlWS = "http://172.30.248.32:8080/ReservaDeSala/rest/usuario/loginV2/";
+        String urlWS = "http://192.168.100.132:8080/ReservaDeSala/rest/usuario/loginV2/";
 
         StringBuilder result = new StringBuilder();
         try
