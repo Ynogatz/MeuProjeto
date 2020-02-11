@@ -12,7 +12,7 @@ public class RegistrarService extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... strings) {
 
-        String urlWS = "http://192.168.100.132:8080/ReservaDeSala/rest/usuario/cadastro/";
+        String urlWS = "http://172.30.248.32:8080/ReservaDeSala/rest/usuario/cadastro/";
 
         StringBuilder result = new StringBuilder();
         try {

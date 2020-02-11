@@ -80,12 +80,10 @@ public class ActivityTelaPrincipal extends AppCompatActivity {
 
                     }
                 }
-                System.out.println("excelente");
                 System.out.println(listaDeNomes);
                 System.out.println(listaDeId);
                 System.out.println(listaDeSalas);
                 System.out.println(listaQuantidadePessoasSentadas);
-
                 System.out.println("excelente");
                 ListView listview = findViewById(R.id.listview_lista_salas);
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(ActivityTelaPrincipal.this, android.R.layout.simple_list_item_1, listaDeNomes);
