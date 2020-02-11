@@ -90,6 +90,7 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
                 }
                 Intent it = new Intent(ActivityTelaRegistrarUsuario.this, ActivityTelaInicial.class);
                 startActivity(it);
+                finish();
             }
         });
         entradaEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -154,9 +155,9 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
                     }
                 }
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }

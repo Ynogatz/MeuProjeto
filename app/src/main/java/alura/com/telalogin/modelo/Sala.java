@@ -4,15 +4,33 @@ public class Sala {
     private int id;
     private String nome;
     private int quantidadePessoasSentadas;
+    private boolean possuiArcon;
+    private boolean possuiMultimidia;
+    private double areaDaSala;
 
-    public int getQuantidadePessoasSentadas() {
-        return quantidadePessoasSentadas;
+    public double getAreaDaSala() {
+        return areaDaSala;
     }
 
-    public void setQuantidadePessoasSentadas(int quantidadePessoasSentadas) {
-        this.quantidadePessoasSentadas = quantidadePessoasSentadas;
+    public void setAreaDaSala(double areaDaSala) {
+        this.areaDaSala = areaDaSala;
     }
 
+    public boolean isPossuiArcon() {
+        return possuiArcon;
+    }
+
+    public void setPossuiArcon(boolean possuiArcon) {
+        this.possuiArcon = possuiArcon;
+    }
+
+    public boolean isPossuiMultimidia() {
+        return possuiMultimidia;
+    }
+
+    public void setPossuiMultimidia(boolean possuiMultimidia) {
+        this.possuiMultimidia = possuiMultimidia;
+    }
 
     public int getId() {
         return id;
@@ -29,4 +47,15 @@ public class Sala {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public int getQuantidadePessoasSentadas() {
+        return quantidadePessoasSentadas;
+    }
+
+    public void setQuantidadePessoasSentadas(int quantidadePessoasSentadas) {
+        this.quantidadePessoasSentadas = quantidadePessoasSentadas;
+    }
+
+
+
 }
