@@ -17,12 +17,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 import alura.com.services.SalaService;
-import alura.com.telalogin.modelo.Sala;
+import alura.com.modelo.Sala;
 
 public class ActivityTelaPrincipal extends AppCompatActivity {
     SharedPreferences prefs;
@@ -32,9 +31,7 @@ public class ActivityTelaPrincipal extends AppCompatActivity {
     List<Integer> listaQuantidadePessoasSentadas = new ArrayList<>();
     List<Boolean> listaPossuiArcon = new ArrayList<>();
     List<Boolean> listaPossuiMultimidia = new ArrayList<>();
-    List<Double>  listaAreaDaSala = new ArrayList<>();
-
-
+    List<Double> listaAreaDaSala = new ArrayList<>();
 
 
     @Override
@@ -58,6 +55,18 @@ public class ActivityTelaPrincipal extends AppCompatActivity {
                 startActivity(it);
             }
         }));
+        ListView listview = findViewById(R.id.listview_lista_salas);
+
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent it = new Intent(ActivityTelaPrincipal.this, ActivityTelaMarcarReuniao.class);
+                it.putExtra("nome", listaDeSalas.get(position).getNome());
+//              it.putExtra("id", listaDeSalas.get(position).getId());
+
+                startActivity(it);
+            }
+        });
 
         try {
             prefs = getSharedPreferences("USER_DATA", Context.MODE_PRIVATE);
@@ -91,19 +100,15 @@ public class ActivityTelaPrincipal extends AppCompatActivity {
                         listaAreaDaSala.add(novaSala.getAreaDaSala());
                     }
                 }
-
-                ListView listview = findViewById(R.id.listview_lista_salas);
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(ActivityTelaPrincipal.this, android.R.layout.simple_list_item_1, listaDeNomes);
                 listview.setAdapter(adapter);
                 super.onCreate(savedInstanceState);
                 setContentView(R.layout.listview_lista_de_salas);
 
-          
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }
 

@@ -1,4 +1,4 @@
-package alura.com.telalogin.modelo;
+package alura.com.modelo;
 
 public class Organizacao {
     private int id;

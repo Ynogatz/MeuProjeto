@@ -24,7 +24,7 @@ import java.util.concurrent.ExecutionException;
 
 import alura.com.services.RegistrarService;
 import alura.com.services.OrganizacaoService;
-import alura.com.telalogin.modelo.Organizacao;
+import alura.com.modelo.Organizacao;
 
 public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
     List<Organizacao> listaDeOrganizacoes = new ArrayList();

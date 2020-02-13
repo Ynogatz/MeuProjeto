@@ -34,14 +34,6 @@ public class ActivityTelaLogin extends AppCompatActivity {
                 startActivity(it);
             }
         }));
-        Button botaoAtalho = (Button) findViewById(R.id.btnAtalho);
-        botaoAtalho.setOnClickListener((new View.OnClickListener() {
-            //botao atalho pra tela de usuario logado
-            public void onClick(View v) {
-                Intent it = new Intent(ActivityTelaLogin.this, ActivityTelaPrincipal.class);
-                startActivity(it);
-            }
-        }));
 
         botaoEntrar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
