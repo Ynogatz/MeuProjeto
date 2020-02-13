@@ -8,14 +8,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import alura.com.modelo.Sala;
 
-public class ActivityTelaMarcarReuniao extends AppCompatActivity {
+public class ActivityTelaSala extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tela_marcar_reuniao);
+        setContentView(R.layout.tela_sala);
 
         Intent it = getIntent();
         Sala parametro = (Sala) it.getSerializableExtra("sala");
@@ -40,7 +42,15 @@ public class ActivityTelaMarcarReuniao extends AppCompatActivity {
         Button botaoVoltar = (Button) findViewById(R.id.btn_voltar);
         botaoVoltar.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
-                Intent it = new Intent(ActivityTelaMarcarReuniao.this, ActivityTelaPrincipal.class);
+                Intent it = new Intent(ActivityTelaSala.this, ActivityTelaPrincipal.class);
+                startActivity(it);
+            }
+        }));
+
+        FloatingActionButton fabAdicionarReservar = (FloatingActionButton) findViewById(R.id.fab_adicionar_reserva);
+        fabAdicionarReservar.setOnClickListener((new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent it = new Intent(ActivityTelaSala.this, ActivityTelaReservarSala.class);
                 startActivity(it);
             }
         }));

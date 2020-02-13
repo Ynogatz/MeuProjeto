@@ -60,7 +60,7 @@ public class ActivityTelaPrincipal extends AppCompatActivity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent it = new Intent(ActivityTelaPrincipal.this, ActivityTelaMarcarReuniao.class);
+                Intent it = new Intent(ActivityTelaPrincipal.this, ActivityTelaSala.class);
                 it.putExtra("sala", listaDeSalas.get(position));
 //              it.putExtra("id", listaDeSalas.get(position).getId());
 
