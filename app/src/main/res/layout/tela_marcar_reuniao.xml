@@ -7,54 +7,37 @@
     tools:context=".ActivityTelaMarcarReuniao">
 
     <TextView
-        android:id="@+id/tv_id"
+        android:id="@+id/tv_possuiArcondicionado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
+        android:layout_marginRight="28dp"
         android:text='"               "'
         android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_area_da_sala"
-        app:layout_constraintTop_toBottomOf="@+id/tv_area_da_sala" />
-
-    <TextView
-        android:id="@+id/tv_nome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text='"               "'
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_id"
-        app:layout_constraintTop_toBottomOf="@+id/tv_id" />
-
-    <TextView
-        android:id="@+id/tv_possuiArcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text='"               "'
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_nome"
-        app:layout_constraintTop_toBottomOf="@+id/tv_nome" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_quantidadePessoasSentadas" />
 
     <TextView
         android:id="@+id/tv_possuiMultimidia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
+        android:layout_marginRight="28dp"
         android:text='"               "'
         android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_possuiArcon"
-        app:layout_constraintTop_toBottomOf="@+id/tv_possuiArcon" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_possuiArcondicionado" />
 
     <TextView
         android:id="@+id/tv_quantidadePessoasSentadas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
+        android:layout_marginRight="28dp"
         android:text='"               "'
         android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_possuiMultimidia"
-        app:layout_constraintTop_toBottomOf="@+id/tv_possuiMultimidia" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_areaTotalDaSala" />
 
     <TextView
         android:id="@+id/tv_nome_sala"
@@ -79,13 +62,72 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tv_area_da_sala"
+        android:id="@+id/tv_areaTotalDaSala"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginRight="28dp"
+        android:text='"               "'
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_area_total_da_sala"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nome_sala" />
+
+    <TextView
+        android:id="@+id/tv_area_total_da_sala"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="56dp"
+        android:text="Area total da sala : "
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nome_sala" />
+
+    <TextView
+        android:id="@+id/tv_quantidade_pessoas_sentadas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="28dp"
         android:layout_marginTop="28dp"
-        android:text='"               "'
+        android:text="Num pessoas sentadas : "
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_nome_sala" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_area_total_da_sala" />
+
+    <TextView
+        android:id="@+id/tv_possui_ar_condicionado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="28dp"
+        android:text="Possui ar condicionado :  "
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_quantidade_pessoas_sentadas" />
+
+    <TextView
+        android:id="@+id/tv_possui_multimidia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="28dp"
+        android:text="Possui multimidia : "
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_possui_ar_condicionado" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_adicionar_reserva"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginBottom="28dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

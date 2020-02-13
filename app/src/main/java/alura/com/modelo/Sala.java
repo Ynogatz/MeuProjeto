@@ -1,12 +1,22 @@
 package alura.com.modelo;
 
-public class Sala {
+import java.io.Serializable;
+
+public class Sala implements Serializable {
     private int id;
     private String nome;
     private int quantidadePessoasSentadas;
     private boolean possuiArcon;
     private boolean possuiMultimidia;
     private double areaDaSala;
+
+    public boolean isPossuiArcon() {
+        return possuiArcon;
+    }
+
+    public boolean isPossuiMultimidia() {
+        return possuiMultimidia;
+    }
 
     public double getAreaDaSala() {
         return areaDaSala;
@@ -16,21 +26,12 @@ public class Sala {
         this.areaDaSala = areaDaSala;
     }
 
-    public boolean isPossuiArcon() {
-        return possuiArcon;
-    }
-
     public void setPossuiArcon(boolean possuiArcon) {
         this.possuiArcon = possuiArcon;
     }
 
-    public boolean isPossuiMultimidia() {
-        return possuiMultimidia;
-    }
-
     public void setPossuiMultimidia(boolean possuiMultimidia) {
-        this.possuiMultimidia = possuiMultimidia;
-    }
+        this.possuiMultimidia = possuiMultimidia; }
 
     public int getId() {
         return id;

@@ -61,7 +61,7 @@ public class ActivityTelaPrincipal extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent it = new Intent(ActivityTelaPrincipal.this, ActivityTelaMarcarReuniao.class);
-                it.putExtra("nome", listaDeSalas.get(position).getNome());
+                it.putExtra("sala", listaDeSalas.get(position));
 //              it.putExtra("id", listaDeSalas.get(position).getId());
 
                 startActivity(it);
@@ -93,11 +93,6 @@ public class ActivityTelaPrincipal extends AppCompatActivity {
                         novaSala.setAreaDaSala(areaDaSala);
                         listaDeSalas.add(novaSala);
                         listaDeNomes.add(novaSala.getNome());
-                        listaDeId.add(novaSala.getId());
-                        listaQuantidadePessoasSentadas.add(novaSala.getQuantidadePessoasSentadas());
-                        listaPossuiArcon.add(novaSala.isPossuiArcon());
-                        listaPossuiMultimidia.add(novaSala.isPossuiMultimidia());
-                        listaAreaDaSala.add(novaSala.getAreaDaSala());
                     }
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(ActivityTelaPrincipal.this, android.R.layout.simple_list_item_1, listaDeNomes);

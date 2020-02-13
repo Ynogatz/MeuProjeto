@@ -7,7 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import alura.com.modelo.Sala;
 
 public class ActivityTelaMarcarReuniao extends AppCompatActivity {
 
@@ -17,13 +18,24 @@ public class ActivityTelaMarcarReuniao extends AppCompatActivity {
         setContentView(R.layout.tela_marcar_reuniao);
 
         Intent it = getIntent();
-        String parametro = (String) it.getSerializableExtra("nome");
+        Sala parametro = (Sala) it.getSerializableExtra("sala");
         TextView nome = (TextView) findViewById(R.id.tv_nome_sala);
-        nome.setText(parametro);
+        nome.setText(parametro.getNome());
 
-//        int parametro2 = (int) it.getSerializableExtra("id");
-//        TextView id = (TextView) findViewById(R.id.tv_id);
-//        nome.setText(parametro2);
+        TextView pessoasSentadas = (TextView) findViewById(R.id.tv_quantidadePessoasSentadas);
+        pessoasSentadas.setText(String.valueOf(parametro.getQuantidadePessoasSentadas()));
+
+        TextView areaDaSala = (TextView) findViewById(R.id.tv_areaTotalDaSala);
+        areaDaSala.setText(String.valueOf(parametro.getAreaDaSala()));
+
+        TextView possuiArcondicionado = (TextView) findViewById(R.id.tv_possuiArcondicionado);
+        possuiArcondicionado.setText(String.valueOf(parametro.isPossuiArcon()));
+
+        TextView possuiMultimidia = (TextView) findViewById(R.id.tv_possuiMultimidia);
+        possuiMultimidia.setText(String.valueOf(parametro.isPossuiMultimidia()));
+
+
+
 
         Button botaoVoltar = (Button) findViewById(R.id.btn_voltar);
         botaoVoltar.setOnClickListener((new View.OnClickListener() {
