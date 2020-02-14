@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -18,7 +19,11 @@ import java.util.Calendar;
 
 import alura.com.modelo.Sala;
 
-public class ActivityTelaSala extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
+import static android.app.ProgressDialog.show;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+
+public class ActivityTelaSala extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +42,21 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
         areaDaSala.setText(String.valueOf(parametro.getAreaDaSala()));
 
         TextView possuiArcondicionado = (TextView) findViewById(R.id.tv_possuiArcondicionado);
-        possuiArcondicionado.setText(String.valueOf(parametro.isPossuiArcon()));
-
+        if (parametro.isPossuiMultimidia() == TRUE) {
+            possuiArcondicionado.setText("Sim");
+        } else if (parametro.isPossuiMultimidia() == FALSE) {
+            possuiArcondicionado.setText("Não");
+        } else {
+            possuiArcondicionado.setText("Não definido");
+        }
         TextView possuiMultimidia = (TextView) findViewById(R.id.tv_possuiMultimidia);
-        possuiMultimidia.setText(String.valueOf(parametro.isPossuiMultimidia()));
-
-
+        if (parametro.isPossuiMultimidia() == TRUE) {
+            possuiMultimidia.setText("Sim");
+        } else if (parametro.isPossuiMultimidia() == FALSE) {
+            possuiMultimidia.setText("Não");
+        } else {
+            possuiMultimidia.setText("Não definido");
+        }
 
 
         Button botaoVoltar = (Button) findViewById(R.id.btn_voltar);
@@ -64,6 +78,7 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
         });
 
     }
+
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar c = Calendar.getInstance();

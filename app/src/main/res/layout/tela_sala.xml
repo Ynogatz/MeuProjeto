@@ -7,9 +7,17 @@
     tools:context=".ActivityTelaSala">
 
 
-
     <TextView
         android:id="@+id/tv_possuiArcondicionado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TRUE"
+        android:textSize="20dp"
+        app:layout_constraintStart_toEndOf="@+id/tv_possui_ar_condicionado"
+        app:layout_constraintTop_toBottomOf="@+id/tv_quantidadePessoasSentadas" />
+
+    <TextView
+        android:id="@+id/tv_possuiMultimidia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TRUE"
@@ -18,23 +26,13 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_areaTotalDaSala" />
 
     <TextView
-        android:id="@+id/tv_possuiMultimidia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="TRUE"
-        android:textSize="20dp"
-        app:layout_constraintStart_toEndOf="@+id/tv_possui_ar_condicionado"
-        app:layout_constraintTop_toBottomOf="@+id/tv_quantidadePessoasSentadas" />
-
-    <TextView
         android:id="@+id/tv_quantidadePessoasSentadas"
         android:layout_width="48dp"
-        android:layout_height="25dp"
+        android:layout_height="30dp"
         android:text="8"
         android:textSize="20dp"
         app:layout_constraintStart_toEndOf="@+id/tv_quantidade_pessoas_sentadas"
-        app:layout_constraintTop_toBottomOf="@+id/tv_possuiArcondicionado" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_possuiMultimidia" />
 
     <Button
         android:id="@+id/btn_voltar"
@@ -133,7 +131,7 @@
         android:id="@+id/tv_dia_selecionado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="dia selecionado"
+        android:text="Dia selecionado"
         app:layout_constraintTop_toBottomOf="@+id/tv_possui_ar_condicionado"
         tools:layout_editor_absoluteX="0dp" />
 
