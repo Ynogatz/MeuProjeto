@@ -9,29 +9,32 @@
 
     <TextView
         android:id="@+id/tv_possuiArcondicionado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="28dp"
+        android:layout_marginRight="28dp"
         android:text="TRUE"
         android:textSize="20dp"
-        app:layout_constraintStart_toEndOf="@+id/tv_possui_ar_condicionado"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_quantidadePessoasSentadas" />
 
     <TextView
         android:id="@+id/tv_possuiMultimidia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="28dp"
+        android:layout_marginRight="28dp"
         android:text="TRUE"
         android:textSize="20dp"
-        app:layout_constraintStart_toEndOf="@+id/tv_possui_multimidia"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_areaTotalDaSala" />
 
     <TextView
         android:id="@+id/tv_quantidadePessoasSentadas"
-        android:layout_width="48dp"
-        android:layout_height="30dp"
+        android:layout_width="50dp"
+        android:layout_height="28dp"
+        android:layout_marginRight="28dp"
         android:text="8"
         android:textSize="20dp"
-        app:layout_constraintStart_toEndOf="@+id/tv_quantidade_pessoas_sentadas"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_possuiMultimidia" />
 
     <Button
@@ -46,17 +49,20 @@
 
     <TextView
         android:id="@+id/tv_areaTotalDaSala"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="28dp"
+        android:layout_marginRight="28dp"
         android:text="20.00"
         android:textSize="20dp"
-        app:layout_constraintStart_toEndOf="@+id/tv_area_total_da_sala"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_nome_sala" />
 
     <TextView
         android:id="@+id/tv_possui_ar_condicionado"
-        android:layout_width="231dp"
-        android:layout_height="27dp"
+        android:layout_width="235dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
         android:text="Possui ar condicionado :  "
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,13 +70,28 @@
 
     <TextView
         android:id="@+id/tv_possui_multimidia"
-        android:layout_width="231dp"
-        android:layout_height="26dp"
-        android:layout_marginTop="6dp"
+        android:layout_width="235dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="28dp"
         android:text="Possui multimidia : "
         android:textSize="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_area_total_da_sala"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_area_total_da_sala" />
+
+    <ListView
+        android:id="@+id/listview_descricoes"
+        android:layout_width="345dp"
+        android:layout_height="353dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="28dp"
+        android:scrollbarSize="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/fab_adicionar_reserva"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.575"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview"
+        app:layout_constraintVertical_bias="0.632" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_adicionar_reserva"
@@ -110,30 +131,64 @@
 
     <TextView
         android:id="@+id/tv_area_total_da_sala"
-        android:layout_width="231dp"
-        android:layout_height="21dp"
+        android:layout_width="235dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="28dp"
         android:text="Area total da sala : "
         android:textSize="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_nome_sala"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nome_sala" />
 
     <TextView
         android:id="@+id/tv_quantidade_pessoas_sentadas"
-        android:layout_width="231dp"
-        android:layout_height="29dp"
-        android:layout_marginTop="1dp"
+        android:layout_width="235dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="28dp"
         android:text="Num pessoas sentadas : "
         android:textSize="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_possui_multimidia"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_possui_multimidia" />
 
     <TextView
         android:id="@+id/tv_dia_selecionado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dia selecionado"
-        app:layout_constraintTop_toBottomOf="@+id/tv_possui_ar_condicionado"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.948"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fab_adicionar_reserva" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Horários já reservados :"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_possui_ar_condicionado" />
+
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="352dp"
+        android:layout_height="18dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginRight="28dp"
+        android:text="|   NomeOrg   |   Hora Inicio   |   Hora Fim   |   Descricao   |"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <GridView
+        android:id="@+id/gridview_descricoes"
+        android:layout_width="409dp"
+        android:layout_height="36dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="242dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

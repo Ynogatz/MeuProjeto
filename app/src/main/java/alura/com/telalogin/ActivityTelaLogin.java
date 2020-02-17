@@ -76,7 +76,7 @@ public class ActivityTelaLogin extends AppCompatActivity {
                                 editor.putString("userTipoEmpresa", tipoOrganizacao);
                                 editor.commit();
                             }
-                            exibirMensagem("login efetuado com sucesso");
+                            exibirMensagem("Login efetuado com sucesso!");
                             Intent it = new Intent(ActivityTelaLogin.this, ActivityTelaPrincipal.class);
                             startActivity(it);
                         } else {
