@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,8 +32,6 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 public class ActivityTelaSala extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
-    Sala sala = new Sala();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +39,7 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
         List<String> listaDeReservas = new ArrayList<>();
 
         Intent it = getIntent();
+        Sala sala = new Sala();
         sala = (Sala) it.getSerializableExtra("sala");
         TextView nome = (TextView) findViewById(R.id.tv_nome_sala);
         nome.setText(sala.getNome());
@@ -107,10 +107,33 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
                         novaReserva.setIdUsuario(idUsuario);
                         novaReserva.setDataHoraInicio(dataHoraInicio);
                         novaReserva.setDataHoraFim(dataHoraFim);
-                        listaDeReservas.add(String.valueOf(novaReserva.getIdUsuario()));
-                        listaDeReservas.add(String.valueOf(novaReserva.getDataHoraInicio()));
-                        listaDeReservas.add(String.valueOf(novaReserva.getDataHoraFim()));
-                        listaDeReservas.add(String.valueOf(novaReserva.getDescricao()));
+                        String dataEHoraInicio = novaReserva.getDataHoraInicio();
+                        String dataEHoraFim = novaReserva.getDataHoraFim();
+                        String anoDiaMes = "";
+                        String horarioInicio = "";
+                        String horarioFim = "";
+                        if (dataEHoraInicio.contains("T")) {
+                            String[] data = dataEHoraInicio.split("T");
+                            if (data.length > 0) {
+                                anoDiaMes = data[0]; }}
+
+
+                        if (dataEHoraInicio.contains("Z")) {
+                            String[] horarioNaoParciado = dataEHoraInicio.split("Z");
+                            if (horarioNaoParciado.length > 0) {
+                                String dataEHoraRow = horarioNaoParciado[0];
+                                int posicaoDoisPontos = dataEHoraRow.indexOf(":");
+                                horarioInicio = dataEHoraRow.substring(posicaoDoisPontos+1);}}
+
+                        if (dataEHoraFim.contains("Z")) {
+                            String[] horarioNaoParciado = dataEHoraFim.split("Z");
+                            if (horarioNaoParciado.length > 0) {
+                                String dataEHoraRow = horarioNaoParciado[0];
+                                int posicaoDoisPontos = dataEHoraRow.indexOf(":");
+                                horarioFim = dataEHoraRow.substring(posicaoDoisPontos+1);}}
+
+
+                        listaDeReservas.add(anoDiaMes + "        -        " + horarioInicio + "        -        " + horarioFim);
                     }
                 }
                 ListView listview_descricoes = findViewById(R.id.listview_descricoes);
