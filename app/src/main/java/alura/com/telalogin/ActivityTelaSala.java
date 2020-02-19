@@ -31,6 +31,8 @@ import alura.com.services.ReservaService;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
+
+
 public class ActivityTelaSala extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +83,8 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
         fabSelecionarDia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment datePicker = new DatePickerFragment();
-                datePicker.show(getSupportFragmentManager(), "date picker");
+                Intent it = new Intent (ActivityTelaSala.this, ActivityReservarSala.class);
+                startActivity(it);
 
             }
         });
