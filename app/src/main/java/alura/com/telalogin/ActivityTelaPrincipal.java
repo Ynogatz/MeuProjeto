@@ -93,7 +93,7 @@ public class ActivityTelaPrincipal extends AppCompatActivity {
                 editor.remove("userNomeEmpresa");
                 editor.remove("userTipoEmpresa");
                 editor.commit();
-                Intent it = new Intent(ActivityTelaPrincipal.this, ActivityTelaInicial.class);
+                Intent it = new Intent(ActivityTelaPrincipal.this, ActivityTelaLogin.class);
                 startActivity(it);
             }
         }));

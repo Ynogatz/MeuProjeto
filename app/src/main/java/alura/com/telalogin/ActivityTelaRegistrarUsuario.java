@@ -53,7 +53,7 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
         Button botaoVoltar = findViewById(R.id.btnVoltar);
         botaoVoltar.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
-                Intent it = new Intent(ActivityTelaRegistrarUsuario.this, ActivityTelaInicial.class);
+                Intent it = new Intent(ActivityTelaRegistrarUsuario.this, ActivityTelaLogin.class);
                 startActivity(it);
             }
         }));
@@ -88,7 +88,7 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
                         Exception e) {
 
                 }
-                Intent it = new Intent(ActivityTelaRegistrarUsuario.this, ActivityTelaInicial.class);
+                Intent it = new Intent(ActivityTelaRegistrarUsuario.this, ActivityTelaLogin.class);
                 startActivity(it);
                 finish();
             }

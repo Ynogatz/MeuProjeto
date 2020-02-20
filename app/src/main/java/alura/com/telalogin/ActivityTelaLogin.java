@@ -24,13 +24,19 @@ public class ActivityTelaLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         prefs = getSharedPreferences("USER_DATA", Context.MODE_PRIVATE);
 
+        if (prefs.contains("userEmail")) {
+            Intent it = new Intent(ActivityTelaLogin.this, ActivityTelaPrincipal.class);
+            startActivity(it);
+        }
+
+
         setContentView(R.layout.tela_login);
         final Button botaoEntrar = findViewById(R.id.btnEntrar);
 
         Button botaoVoltar = (Button) findViewById(R.id.btnVoltar);
         botaoVoltar.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
-                Intent it = new Intent(ActivityTelaLogin.this, ActivityTelaInicial.class);
+                Intent it = new Intent(ActivityTelaLogin.this, ActivityTelaRegistrarUsuario.class);
                 startActivity(it);
             }
         }));

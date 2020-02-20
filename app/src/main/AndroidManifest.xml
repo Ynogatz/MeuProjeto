@@ -15,9 +15,8 @@
         <activity android:name=".ActivityReservarSala"></activity>
         <activity android:name=".ActivityTelaSala" />
         <activity android:name=".ActivityTelaPrincipal" />
-        <activity android:name=".ActivityTelaLogin" />
         <activity android:name=".ActivityTelaRegistrarUsuario" />
-        <activity android:name=".ActivityTelaInicial">
+        <activity android:name=".ActivityTelaLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
