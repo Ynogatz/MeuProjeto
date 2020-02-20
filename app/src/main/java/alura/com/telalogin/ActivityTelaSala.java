@@ -34,6 +34,7 @@ import static java.lang.Boolean.TRUE;
 
 
 public class ActivityTelaSala extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+    Sala sala = new Sala();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +42,9 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
         List<String> listaDeReservas = new ArrayList<>();
 
         Intent it = getIntent();
-        Sala sala = new Sala();
+
         sala = (Sala) it.getSerializableExtra("sala");
+        System.out.println(sala.getId());
         TextView nome = (TextView) findViewById(R.id.tv_nome_sala);
         nome.setText(sala.getNome());
 
@@ -84,6 +86,7 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
             @Override
             public void onClick(View v) {
                 Intent it = new Intent (ActivityTelaSala.this, ActivityReservarSala.class);
+                it.putExtra("idSala", sala.getId());
                 startActivity(it);
 
             }
@@ -151,14 +154,7 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, year);
-        c.set(Calendar.MONTH, month);
-        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
 
-        TextView textView = (TextView) findViewById(R.id.tv_dia_selecionado);
-        textView.setText(currentDateString);
     }
 }
 

@@ -124,16 +124,6 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_possui_multimidia" />
 
     <TextView
-        android:id="@+id/tv_dia_selecionado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dia selecionado"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.948"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fab_adicionar_reserva" />
-
-    <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -6,16 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".ActivityReservarSala">
 
-    <Button
-        android:id="@+id/btn_selecionar_horario"
+    <TextView
+        android:id="@+id/tv_visualizar_horario_fim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="horario"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_visualizar_horario" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_selecionar_horario_inicio" />
+
+    <Button
+        android:id="@+id/btn_selecionar_horario_fim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:text="horario Fim"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.531"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_selecionar_horario_inicio" />
+
+    <Button
+        android:id="@+id/btn_selecionar_horario_inicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="horario Inicio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_visualizar_horario_inicio" />
 
     <Button
         android:id="@+id/btn_selecionar_data"
@@ -50,7 +71,7 @@
         app:layout_constraintTop_toBottomOf="@+id/et_descricao" />
 
     <TextView
-        android:id="@+id/tv_visualizar_horario"
+        android:id="@+id/tv_visualizar_horario_inicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"

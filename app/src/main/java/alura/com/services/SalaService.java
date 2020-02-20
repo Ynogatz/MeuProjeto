@@ -33,7 +33,6 @@ public class SalaService extends AsyncTask<String, Void, String>
                 result.append(line);
             }
             rd.close();
-            System.out.println(result.toString());
             return result.toString();
         }
         catch (Exception e)

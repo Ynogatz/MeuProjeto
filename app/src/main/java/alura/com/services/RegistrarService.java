@@ -29,11 +29,9 @@ public class RegistrarService extends AsyncTask<String, Void, String> {
                 result.append(line);
             }
             rd.close();
-            System.out.println("deu boa");
             return result.toString();
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("deu ruim");
         }
         return result.toString();
     }

@@ -42,7 +42,6 @@ public class ActivityTelaPrincipal extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent it = new Intent(ActivityTelaPrincipal.this, ActivityTelaSala.class);
                 it.putExtra("sala", listaDeSalas.get(position));
-
                 startActivity(it);
             }
         });
