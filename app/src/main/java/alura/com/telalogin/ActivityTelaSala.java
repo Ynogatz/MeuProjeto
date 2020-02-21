@@ -1,27 +1,25 @@
 package alura.com.telalogin;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import alura.com.modelo.Reserva;
@@ -32,9 +30,9 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 
-
 public class ActivityTelaSala extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     Sala sala = new Sala();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +83,7 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
         fabSelecionarDia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent (ActivityTelaSala.this, ActivityReservarSala.class);
+                Intent it = new Intent(ActivityTelaSala.this, ActivityReservarSala.class);
                 it.putExtra("idSala", sala.getId());
                 startActivity(it);
 
@@ -120,7 +118,9 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
                         if (dataEHoraInicio.contains("T")) {
                             String[] data = dataEHoraInicio.split("T");
                             if (data.length > 0) {
-                                anoDiaMes = data[0]; }}
+                                anoDiaMes = data[0];
+                            }
+                        }
 
 
                         if (dataEHoraInicio.contains("Z")) {
@@ -128,14 +128,18 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
                             if (horarioNaoParciado.length > 0) {
                                 String dataEHoraRow = horarioNaoParciado[0];
                                 int posicaoDoisPontos = dataEHoraRow.indexOf(":");
-                                horarioInicio = dataEHoraRow.substring(posicaoDoisPontos+1);}}
+                                horarioInicio = dataEHoraRow.substring(posicaoDoisPontos + 1);
+                            }
+                        }
 
                         if (dataEHoraFim.contains("Z")) {
                             String[] horarioNaoParciado = dataEHoraFim.split("Z");
                             if (horarioNaoParciado.length > 0) {
                                 String dataEHoraRow = horarioNaoParciado[0];
                                 int posicaoDoisPontos = dataEHoraRow.indexOf(":");
-                                horarioFim = dataEHoraRow.substring(posicaoDoisPontos+1);}}
+                                horarioFim = dataEHoraRow.substring(posicaoDoisPontos + 1);
+                            }
+                        }
 
 
                         listaDeReservas.add(anoDiaMes + "        -        " + horarioInicio + "        -        " + horarioFim);
@@ -150,6 +154,22 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        ListView listview = findViewById(R.id.listview_descricoes);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(ActivityTelaSala.this, "abrir dialog", Toast.LENGTH_SHORT).show();
+            }
+        });
+        listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            public boolean onItemLongClick(AdapterView<?> arg0, View v,
+                                           int index, long arg3) {
+                Toast.makeText(ActivityTelaSala.this, "abrir dialog para deletar ", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
     }
 
     @Override

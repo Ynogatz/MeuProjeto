@@ -1,7 +1,5 @@
 package alura.com.telalogin;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONObject;
 
@@ -33,8 +33,8 @@ public class ActivityTelaLogin extends AppCompatActivity {
         setContentView(R.layout.tela_login);
         final Button botaoEntrar = findViewById(R.id.btnEntrar);
 
-        Button botaoVoltar = (Button) findViewById(R.id.btnVoltar);
-        botaoVoltar.setOnClickListener((new View.OnClickListener() {
+        Button botaoRegistrar = (Button) findViewById(R.id.btnRegistrar);
+        botaoRegistrar.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
                 Intent it = new Intent(ActivityTelaLogin.this, ActivityTelaRegistrarUsuario.class);
                 startActivity(it);
@@ -82,21 +82,19 @@ public class ActivityTelaLogin extends AppCompatActivity {
                                 editor.putString("userTipoEmpresa", tipoOrganizacao);
                                 editor.commit();
                             }
-                            exibirMensagem("Login efetuado com sucesso!");
+                            Toast.makeText(ActivityTelaLogin.this, "Login efetuado com sucesso!", Toast.LENGTH_SHORT).show();
                             Intent it = new Intent(ActivityTelaLogin.this, ActivityTelaPrincipal.class);
                             startActivity(it);
                         } else {
-                            exibirMensagem("Credenciais Inválidas!");
+                            Toast.makeText(ActivityTelaLogin.this, "Credenciais Inválidas!", Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
             }
         });
-    }
-
-    public void exibirMensagem(String mensagem) {
-        Toast.makeText(this, mensagem, Toast.LENGTH_LONG).show();
     }
 }

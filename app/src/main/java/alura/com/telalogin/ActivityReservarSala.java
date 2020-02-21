@@ -1,12 +1,12 @@
 package alura.com.telalogin;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -15,16 +15,25 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import alura.com.services.CadastroReservaService;
+
 public class ActivityReservarSala extends AppCompatActivity {
     SharedPreferences prefs;
     int idSala;
     Button botaoConfirma;
-    String anoMesDia, horaMinutoInicio, horaMinutoFim, descricao, dateStrInicio, dateStrFim;
+    String anoMesDia, horaMinutoInicio, horaMinutoFim, dateStrInicio, dateStrFim, descricao;
+    Long dateInicioEpoch, dateFimEpoch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +43,13 @@ public class ActivityReservarSala extends AppCompatActivity {
         Button timeButtonInicio = findViewById(R.id.btn_selecionar_horario_inicio);
         Button timeButtonFim = findViewById(R.id.btn_selecionar_horario_fim);
         final EditText etDescricao = findViewById(R.id.et_descricao);
-
+        Button botaoVoltar = findViewById(R.id.btnRegistrar);
+        botaoVoltar.setOnClickListener((new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent it = new Intent(ActivityReservarSala.this, ActivityTelaPrincipal.class);
+                startActivity(it);
+            }
+        }));
 
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,17 +89,51 @@ public class ActivityReservarSala extends AppCompatActivity {
                 } else if (horaMinutoFim == null) {
                     Toast.makeText(ActivityReservarSala.this, "Selecione o horario de fim", Toast.LENGTH_SHORT).show();
                 } else {
-                    System.out.println(anoMesDia + " - " + horaMinutoInicio + " - " + horaMinutoFim);
-
                     dateStrInicio = (anoMesDia + " " + horaMinutoInicio);
-
-
+                    dateStrFim = (anoMesDia + " " + horaMinutoFim);
                     try {
                         Date dateInicio = new SimpleDateFormat("dd/MM/YYYY HH:mm").parse(dateStrInicio);
-                        Long dateInicioEpoch = dateInicio.getTime();
-                        System.out.println(dateInicioEpoch);
+                        dateInicioEpoch = dateInicio.getTime();
+                        Date dateFim = new SimpleDateFormat("dd/MM/YYYY HH:mm").parse(dateStrFim);
+                        dateFimEpoch = dateFim.getTime();
                     } catch (ParseException e) {
                         e.printStackTrace();
+                    }
+
+                    JSONObject reservaJson = new JSONObject();
+                    try {
+                        String usuarioIdString = String.valueOf(userId);
+                        String salaIdString = String.valueOf(idSala);
+                        String descricaoString = String.valueOf(descricao);
+                        String dataInicioString = String.valueOf(dateInicioEpoch);
+                        String dataFinalString = String.valueOf(dateFimEpoch);
+
+                        reservaJson.put("usuarioId", usuarioIdString);
+                        reservaJson.put("salaId", salaIdString);
+                        reservaJson.put("descricao", descricaoString);
+                        reservaJson.put("dataInicio", dataInicioString);
+                        reservaJson.put("dataFinal", dataFinalString);
+
+//                        reservaJson.put("userId", usuarioIdString);
+//                        reservaJson.put("idSala", salaIdString);
+//                        reservaJson.put("descricao", descricaoString);
+//                        reservaJson.put("dateInicioEpoch", dataInicioString);
+//                        reservaJson.put("dateFimEpoch", dataFinalString);
+
+                        String novaReservaDecode;
+                        String reservaCod = new String(Base64.encodeToString(reservaJson.toString().getBytes("UTF-8"), Base64.NO_WRAP));
+
+                        Toast.makeText(ActivityReservarSala.this, new CadastroReservaService().execute(reservaCod).get(), Toast.LENGTH_SHORT).show();
+
+                    } catch (
+                            JSONException e) {
+                        e.printStackTrace();
+                    } catch (
+                            UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    } catch (
+                            Exception e) {
+
                     }
                 }
             }
@@ -103,14 +152,12 @@ public class ActivityReservarSala extends AppCompatActivity {
                 TextView data = findViewById(R.id.tv_visualizar_data);
                 final String dateString = "Ano: " + year + " Mês " + (month + 1) + " Dia " + date;
                 String monthStr;
-                String dateStr = null;
-
+                String dateStr;
                 if (month < 10) {
                     monthStr = "0" + (month);
                 } else {
                     monthStr = String.valueOf(month);
                 }
-
                 if (date < 10) {
                     dateStr = "0" + (date);
                 } else {
@@ -118,8 +165,6 @@ public class ActivityReservarSala extends AppCompatActivity {
                 }
                 anoMesDia = (dateStr + "/" + monthStr + "/" + year);
                 data.setText(dateString);
-
-
             }
         }, YEAR, MONTH, DATE);
         datePickerDialog.show();
@@ -133,15 +178,15 @@ public class ActivityReservarSala extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
                 final TextView horario = findViewById(R.id.tv_visualizar_horario_inicio);
-                String hourStr = null;
-                String minuteStr = null;
+                String hourStr;
+                String minuteStr;
                 if (hour < 10) {
-                    hourStr = "0" + String.valueOf(hour);
+                    hourStr = "0" + (hour);
                 } else {
                     hourStr = String.valueOf(hour);
                 }
                 if (minute < 10) {
-                    minuteStr = "0" + String.valueOf(minute);
+                    minuteStr = "0" + (minute);
                 } else {
                     minuteStr = String.valueOf(minute);
                 }
@@ -162,15 +207,15 @@ public class ActivityReservarSala extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
                 final TextView horario = findViewById(R.id.tv_visualizar_horario_fim);
-                String hourStr = null;
-                String minuteStr = null;
+                String hourStr;
+                String minuteStr;
                 if (hour < 10) {
-                    hourStr = "0" + String.valueOf(hour);
+                    hourStr = "0" + (hour);
                 } else {
                     hourStr = String.valueOf(hour);
                 }
                 if (minute < 10) {
-                    minuteStr = "0" + String.valueOf(minute);
+                    minuteStr = "0" + (minute);
                 } else {
                     minuteStr = String.valueOf(minute);
                 }

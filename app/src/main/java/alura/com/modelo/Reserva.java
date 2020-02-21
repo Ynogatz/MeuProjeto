@@ -4,7 +4,6 @@ public class Reserva {
     private int idSala;
     private int idUsuario;
     private String descricao;
-    private boolean ativo;
     private String dataHoraInicio;
     private String dataHoraFim;
 
@@ -30,14 +29,6 @@ public class Reserva {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public boolean isAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
     }
 
     public String getDataHoraInicio() {

@@ -54,16 +54,16 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
         android:text="Entrar"
-        app:layout_constraintBottom_toTopOf="@+id/btnVoltar"
+        app:layout_constraintBottom_toTopOf="@+id/btnRegistrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnVoltar"
+        android:id="@+id/btnRegistrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="56dp"
-        android:text="VOLTAR"
+        android:text="REGISTRAR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

@@ -50,7 +50,7 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        Button botaoVoltar = findViewById(R.id.btnVoltar);
+        Button botaoVoltar = findViewById(R.id.btnRegistrar);
         botaoVoltar.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
                 Intent it = new Intent(ActivityTelaRegistrarUsuario.this, ActivityTelaLogin.class);
