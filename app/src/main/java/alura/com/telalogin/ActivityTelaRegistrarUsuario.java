@@ -73,7 +73,6 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
                     usuarioJson.put("senha", senhaString);
                     usuarioJson.put("idOrganizacao", idOrganizacaoSelecionada);
 
-                    String novoUsuarioDecode;
                     String userCod = new String(Base64.encodeToString(usuarioJson.toString().getBytes("UTF-8"), Base64.NO_WRAP));
 
                     Toast.makeText(ActivityTelaRegistrarUsuario.this, new RegistrarService().execute(userCod).get(), Toast.LENGTH_SHORT).show();

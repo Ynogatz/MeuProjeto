@@ -26,7 +26,7 @@
         android:layout_marginBottom="28dp"
         android:background="#19000000"
         android:ems="10"
-        android:hint="Insira seu email"
+        android:hint="Insira seu email "
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/etSenha"
         app:layout_constraintEnd_toEndOf="parent"

@@ -91,10 +91,11 @@ public class ActivityReservarSala extends AppCompatActivity {
                 } else {
                     dateStrInicio = (anoMesDia + " " + horaMinutoInicio);
                     dateStrFim = (anoMesDia + " " + horaMinutoFim);
+
                     try {
-                        Date dateInicio = new SimpleDateFormat("dd/MM/YYYY HH:mm").parse(dateStrInicio);
+                        Date dateInicio = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(dateStrInicio);
                         dateInicioEpoch = dateInicio.getTime();
-                        Date dateFim = new SimpleDateFormat("dd/MM/YYYY HH:mm").parse(dateStrFim);
+                        Date dateFim = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(dateStrFim);
                         dateFimEpoch = dateFim.getTime();
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -102,29 +103,28 @@ public class ActivityReservarSala extends AppCompatActivity {
 
                     JSONObject reservaJson = new JSONObject();
                     try {
-                        String usuarioIdString = String.valueOf(userId);
-                        String salaIdString = String.valueOf(idSala);
-                        String descricaoString = String.valueOf(descricao);
-                        String dataInicioString = String.valueOf(dateInicioEpoch);
-                        String dataFinalString = String.valueOf(dateFimEpoch);
 
-                        reservaJson.put("usuarioId", usuarioIdString);
-                        reservaJson.put("salaId", salaIdString);
-                        reservaJson.put("descricao", descricaoString);
-                        reservaJson.put("dataInicio", dataInicioString);
-                        reservaJson.put("dataFinal", dataFinalString);
+//                        int usuarioId = Integer.valueOf(userId);
+//                        int salaId = Integer.valueOf(idSala);
+//                        String descricaoStr = String.valueOf(descricao);
+//                        long dataInicio = Long.valueOf(dateInicioEpoch);
+//                        long dataFinalString = Long.valueOf(dateFimEpoch);
 
-//                        reservaJson.put("userId", usuarioIdString);
-//                        reservaJson.put("idSala", salaIdString);
-//                        reservaJson.put("descricao", descricaoString);
-//                        reservaJson.put("dateInicioEpoch", dataInicioString);
-//                        reservaJson.put("dateFimEpoch", dataFinalString);
 
-                        String novaReservaDecode;
+                        int usuarioId = userId;
+                        int salaId = idSala;
+                        String descricaoStr = descricao;
+
+
+                        reservaJson.put("id_usuario", usuarioId);
+                        reservaJson.put("id_sala", salaId);
+                        reservaJson.put("descricao", descricaoStr);
+                        reservaJson.put("data_hora_inicio", dateInicioEpoch - 10800000);
+                        reservaJson.put("data_hora_fim", dateFimEpoch - 10800000);
+
+
                         String reservaCod = new String(Base64.encodeToString(reservaJson.toString().getBytes("UTF-8"), Base64.NO_WRAP));
-
                         Toast.makeText(ActivityReservarSala.this, new CadastroReservaService().execute(reservaCod).get(), Toast.LENGTH_SHORT).show();
-
                     } catch (
                             JSONException e) {
                         e.printStackTrace();
@@ -154,9 +154,9 @@ public class ActivityReservarSala extends AppCompatActivity {
                 String monthStr;
                 String dateStr;
                 if (month < 10) {
-                    monthStr = "0" + (month);
+                    monthStr = "0" + (month+1);
                 } else {
-                    monthStr = String.valueOf(month);
+                    monthStr = String.valueOf(month+1);
                 }
                 if (date < 10) {
                     dateStr = "0" + (date);

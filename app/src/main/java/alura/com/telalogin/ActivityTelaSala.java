@@ -1,6 +1,7 @@
 package alura.com.telalogin;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -42,7 +43,6 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
         Intent it = getIntent();
 
         sala = (Sala) it.getSerializableExtra("sala");
-        System.out.println(sala.getId());
         TextView nome = (TextView) findViewById(R.id.tv_nome_sala);
         nome.setText(sala.getNome());
 
@@ -102,7 +102,6 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
                         String descricao = obj.getString("descricao");
                         String dataHoraInicio = obj.getString("dataHoraInicio");
                         String dataHoraFim = obj.getString("dataHoraFim");
-
 
                         Reserva novaReserva = new Reserva();
                         novaReserva.setIdSala(idSala);
