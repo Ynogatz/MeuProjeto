@@ -138,6 +138,7 @@
     <ListView
         android:id="@+id/listview_descricoes"
         android:layout_width="332dp"
+        android:longClickable="true"
         android:layout_height="226dp"
         android:layout_marginTop="32dp"
         android:scrollbarSize="4dp"

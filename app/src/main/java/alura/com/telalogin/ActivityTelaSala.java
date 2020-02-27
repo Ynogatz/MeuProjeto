@@ -1,7 +1,7 @@
 package alura.com.telalogin;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,27 +32,29 @@ import static java.lang.Boolean.TRUE;
 
 public class ActivityTelaSala extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     Sala sala = new Sala();
+    Reserva reserva = new Reserva();
+    List<Reserva> listaDeObjetosReserva = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tela_sala);
-        List<String> listaDeReservas = new ArrayList<>();
+        final List<String> listaDeReservas = new ArrayList<>();
 
         Intent it = getIntent();
 
         sala = (Sala) it.getSerializableExtra("sala");
-        TextView nome = (TextView) findViewById(R.id.tv_nome_sala);
+
+        TextView nome = findViewById(R.id.tv_nome_sala);
         nome.setText(sala.getNome());
 
-        TextView pessoasSentadas = (TextView) findViewById(R.id.tv_quantidadePessoasSentadas);
+        TextView pessoasSentadas = findViewById(R.id.tv_quantidadePessoasSentadas);
         pessoasSentadas.setText(String.valueOf(sala.getQuantidadePessoasSentadas()));
 
-        TextView areaDaSala = (TextView) findViewById(R.id.tv_areaTotalDaSala);
+        TextView areaDaSala = findViewById(R.id.tv_areaTotalDaSala);
         areaDaSala.setText(String.valueOf(sala.getAreaDaSala()));
 
-
-        TextView possuiArcondicionado = (TextView) findViewById(R.id.tv_possuiArcondicionado);
+        TextView possuiArcondicionado = findViewById(R.id.tv_possuiArcondicionado);
         if (sala.isPossuiMultimidia() == TRUE) {
             possuiArcondicionado.setText("Sim");
         } else if (sala.isPossuiMultimidia() == FALSE) {
@@ -61,7 +62,7 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
         } else {
             possuiArcondicionado.setText("Não definido");
         }
-        TextView possuiMultimidia = (TextView) findViewById(R.id.tv_possuiMultimidia);
+        TextView possuiMultimidia = findViewById(R.id.tv_possuiMultimidia);
         if (sala.isPossuiMultimidia()) {
             possuiMultimidia.setText("Sim");
         } else if (sala.isPossuiMultimidia() == FALSE) {
@@ -71,7 +72,7 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
         }
 
 
-        Button botaoVoltar = (Button) findViewById(R.id.btn_voltar);
+        Button botaoVoltar = findViewById(R.id.btn_voltar);
         botaoVoltar.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
                 Intent it = new Intent(ActivityTelaSala.this, ActivityTelaPrincipal.class);
@@ -79,7 +80,7 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
             }
         }));
 
-        FloatingActionButton fabSelecionarDia = (FloatingActionButton) findViewById(R.id.fab_adicionar_reserva);
+        FloatingActionButton fabSelecionarDia = findViewById(R.id.fab_adicionar_reserva);
         fabSelecionarDia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,12 +97,14 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
             if (reservasReturn.length() > 1) {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject obj = jsonArray.getJSONObject(i);
-                    if (obj.has("idSala") && obj.has("idUsuario") && obj.has("dataHoraInicio") && obj.has("dataHoraFim")) {
+                    if (obj.has("idSala") && obj.has("idUsuario") && obj.has("dataHoraInicio") && obj.has("dataHoraFim") && obj.has ("nomeOrganizador")) {
                         int idSala = obj.getInt("idSala");
                         int idUsuario = obj.getInt("idUsuario");
                         String descricao = obj.getString("descricao");
                         String dataHoraInicio = obj.getString("dataHoraInicio");
                         String dataHoraFim = obj.getString("dataHoraFim");
+                        String nomeOrganizador = obj.getString("nomeOrganizador");
+
 
                         Reserva novaReserva = new Reserva();
                         novaReserva.setIdSala(idSala);
@@ -109,6 +112,7 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
                         novaReserva.setIdUsuario(idUsuario);
                         novaReserva.setDataHoraInicio(dataHoraInicio);
                         novaReserva.setDataHoraFim(dataHoraFim);
+                        novaReserva.setNomeOrganizador(nomeOrganizador);
                         String dataEHoraInicio = novaReserva.getDataHoraInicio();
                         String dataEHoraFim = novaReserva.getDataHoraFim();
                         String anoDiaMes = "";
@@ -126,8 +130,7 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
                             String[] horarioNaoParciado = dataEHoraInicio.split("Z");
                             if (horarioNaoParciado.length > 0) {
                                 String dataEHoraRow = horarioNaoParciado[0];
-                                int posicaoDoisPontos = dataEHoraRow.indexOf(":");
-                                horarioInicio = dataEHoraRow.substring(posicaoDoisPontos + 1);
+                                horarioInicio = dataEHoraRow.split("T")[1];
                             }
                         }
 
@@ -135,13 +138,11 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
                             String[] horarioNaoParciado = dataEHoraFim.split("Z");
                             if (horarioNaoParciado.length > 0) {
                                 String dataEHoraRow = horarioNaoParciado[0];
-                                int posicaoDoisPontos = dataEHoraRow.indexOf(":");
-                                horarioFim = dataEHoraRow.substring(posicaoDoisPontos + 1);
+                                horarioFim = dataEHoraRow.split("T")[1];
                             }
                         }
-
-
-                        listaDeReservas.add(anoDiaMes + "        -        " + horarioInicio + "        -        " + horarioFim);
+                        listaDeReservas.add(anoDiaMes + "    -    " + horarioInicio + "    -    " + horarioFim);
+                        listaDeObjetosReserva.add(novaReserva);
                     }
                 }
                 ListView listview_descricoes = findViewById(R.id.listview_descricoes);
@@ -153,20 +154,28 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         ListView listview = findViewById(R.id.listview_descricoes);
+        if (1 == 1) {
+            listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+                public boolean onItemLongClick(AdapterView<?> arg0, View v,
+                                               int index, long arg3) {
+                    AlertDialog.Builder mensagem = new AlertDialog.Builder(ActivityTelaSala.this);
+                    mensagem.setTitle("onlongclick");
+                    mensagem.setMessage("texto");
+                    mensagem.setNegativeButton("Não", null);
+                    mensagem.setPositiveButton("Sim", null);
+                    mensagem.show();
+                    return true;
+                }
+            });
+        }
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(ActivityTelaSala.this, "abrir dialog", Toast.LENGTH_SHORT).show();
-            }
-        });
-        listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-
-            public boolean onItemLongClick(AdapterView<?> arg0, View v,
-                                           int index, long arg3) {
-                Toast.makeText(ActivityTelaSala.this, "abrir dialog para deletar ", Toast.LENGTH_SHORT).show();
-                return false;
+                Intent it = new Intent(ActivityTelaSala.this, ActivityTelaInfoReserva.class);
+                it.putExtra("reservas", listaDeObjetosReserva.get(position));
+                startActivity(it);
             }
         });
     }

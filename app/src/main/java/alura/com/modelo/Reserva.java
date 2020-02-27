@@ -1,11 +1,22 @@
 package alura.com.modelo;
 
-public class Reserva {
+import java.io.Serializable;
+
+public class Reserva implements Serializable {
     private int idSala;
     private int idUsuario;
     private String descricao;
     private String dataHoraInicio;
     private String dataHoraFim;
+    private String nomeOrganizador;
+
+    public String getNomeOrganizador() {
+        return nomeOrganizador;
+    }
+
+    public void setNomeOrganizador(String nomeOrganizador) {
+        this.nomeOrganizador = nomeOrganizador;
+    }
 
     public int getIdSala() {
         return idSala;
