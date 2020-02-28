@@ -110,7 +110,6 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
                                     String listaOrganizacao = new OrganizacaoService().execute(dominio).get();
                                     System.out.println("dominio: " + dominio);
                                     System.out.println("organizacoes retornadas " + listaOrganizacao);
-
                                     if (listaOrganizacao.length() == 0) {
                                         Toast.makeText(ActivityTelaRegistrarUsuario.this, "O dominio do email informado nao faz parte de nenhuma organizacao", Toast.LENGTH_SHORT).show();
                                     } else {
