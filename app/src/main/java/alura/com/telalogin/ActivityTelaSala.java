@@ -2,6 +2,7 @@ package alura.com.telalogin;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,9 +23,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import alura.com.modelo.Reserva;
 import alura.com.modelo.Sala;
+import alura.com.services.CancelarReservaService;
 import alura.com.services.ReservaService;
 
 import static java.lang.Boolean.FALSE;
@@ -34,6 +38,7 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
     Sala sala = new Sala();
     Reserva reserva = new Reserva();
     List<Reserva> listaDeObjetosReserva = new ArrayList<>();
+    ListView listview_descricoes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +102,8 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
             if (reservasReturn.length() > 1) {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject obj = jsonArray.getJSONObject(i);
-                    if (obj.has("idSala") && obj.has("idUsuario") && obj.has("dataHoraInicio") && obj.has("dataHoraFim") && obj.has ("nomeOrganizador")) {
+                    if (obj.has("idSala") && obj.has("idUsuario") && obj.has("dataHoraInicio") && obj.has("dataHoraFim") && obj.has("nomeOrganizador")) {
+                        int id = obj.getInt("id");
                         int idSala = obj.getInt("idSala");
                         int idUsuario = obj.getInt("idUsuario");
                         String descricao = obj.getString("descricao");
@@ -113,6 +119,7 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
                         novaReserva.setDataHoraInicio(dataHoraInicio);
                         novaReserva.setDataHoraFim(dataHoraFim);
                         novaReserva.setNomeOrganizador(nomeOrganizador);
+                        novaReserva.setId(id);
                         String dataEHoraInicio = novaReserva.getDataHoraInicio();
                         String dataEHoraFim = novaReserva.getDataHoraFim();
                         String anoDiaMes = "";
@@ -145,7 +152,7 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
                         listaDeObjetosReserva.add(novaReserva);
                     }
                 }
-                ListView listview_descricoes = findViewById(R.id.listview_descricoes);
+                listview_descricoes = findViewById(R.id.listview_descricoes);
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(ActivityTelaSala.this, android.R.layout.simple_list_item_1, listaDeReservas);
                 listview_descricoes.setAdapter(adapter);
                 super.onCreate(savedInstanceState);
@@ -160,12 +167,42 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
 
                 public boolean onItemLongClick(AdapterView<?> arg0, View v,
                                                int index, long arg3) {
-                    AlertDialog.Builder mensagem = new AlertDialog.Builder(ActivityTelaSala.this);
-                    mensagem.setTitle("onlongclick");
-                    mensagem.setMessage("texto");
-                    mensagem.setNegativeButton("Não", null);
-                    mensagem.setPositiveButton("Sim", null);
-                    mensagem.show();
+                    final int i = index;
+                    if (1 == 1) {
+                        AlertDialog.Builder mensagem = new AlertDialog.Builder(ActivityTelaSala.this);
+                        mensagem.setTitle("Cancelar reserva");
+                        mensagem.setMessage("Tem certeza que deseja cancelar esta reserva?");
+                        mensagem.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(ActivityTelaSala.this, "Reserva não cancelada", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        mensagem.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                try {
+                                    String cancelarReservaReturn = new CancelarReservaService().execute(String.valueOf(listaDeObjetosReserva.get(i).getId())).get();
+                                    if (cancelarReservaReturn.equals("A reserva foi cancelada com sucesso")) {
+                                        Toast.makeText(ActivityTelaSala.this, "A reserva foi cancelada com sucesso", Toast.LENGTH_SHORT).show();
+                                        listaDeReservas.remove(i);
+                                        ArrayAdapter<String> adapter = new ArrayAdapter<>(ActivityTelaSala.this, android.R.layout.simple_list_item_1, listaDeReservas);
+                                        listview_descricoes.setAdapter(adapter);
+                                    } else {
+                                        Toast.makeText(ActivityTelaSala.this, "O cancelamento da reserva não foi concluído", Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (ExecutionException e) {
+                                    e.printStackTrace();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        });
+                        mensagem.show();
+                    } else {
+                        Toast.makeText(ActivityTelaSala.this, "Não é possivel cancelar uma reserva que não foi criada por você", Toast.LENGTH_SHORT).show();
+                    }
                     return true;
                 }
             });
@@ -179,7 +216,6 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
             }
         });
     }
-
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 

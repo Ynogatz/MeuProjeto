@@ -103,18 +103,9 @@ public class ActivityReservarSala extends AppCompatActivity {
 
                     JSONObject reservaJson = new JSONObject();
                     try {
-
-//                        int usuarioId = Integer.valueOf(userId);
-//                        int salaId = Integer.valueOf(idSala);
-//                        String descricaoStr = String.valueOf(descricao);
-//                        long dataInicio = Long.valueOf(dateInicioEpoch);
-//                        long dataFinalString = Long.valueOf(dateFimEpoch);
-
-
                         int usuarioId = userId;
                         int salaId = idSala;
                         String descricaoStr = descricao;
-
 
                         reservaJson.put("id_usuario", usuarioId);
                         reservaJson.put("id_sala", salaId);

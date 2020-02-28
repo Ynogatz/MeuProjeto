@@ -9,6 +9,15 @@ public class Reserva implements Serializable {
     private String dataHoraInicio;
     private String dataHoraFim;
     private String nomeOrganizador;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNomeOrganizador() {
         return nomeOrganizador;

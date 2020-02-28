@@ -7,63 +7,94 @@
     tools:context=".ActivityTelaInfoReserva">
 
     <TextView
-        android:id="@+id/tv1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
-        android:layout_marginTop="76dp"
-        android:text="TextView"
+        android:id="@+id/tv_data_hora_inicio"
+        android:layout_width="140dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginRight="28dp"
+        android:text="2020-02-27T04:32"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_data_hora_fim"
+        android:layout_width="140dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginRight="28dp"
+        android:text="2020-02-27T04:40"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_data_hora_inicio" />
+
+    <TextView
+        android:id="@+id/tv_descricoes"
+        android:layout_width="140dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginRight="28dp"
+        android:text="descricoes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_data_hora_fim" />
+
+    <TextView
+        android:id="@+id/tv_nome_completo"
+        android:layout_width="140dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginRight="28dp"
+        android:text="Ygor Nogatz da Silva"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_descricoes" />
+
+    <TextView
+        android:id="@+id/tv_HoraInicio"
+        android:layout_width="140dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="28dp"
+        android:text="Hora Inicio :"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
-        android:text="TextView"
+        android:id="@+id/textView5"
+        android:layout_width="140dp"
+        android:layout_height="20dp"
+        android:layout_margin="28dp"
+        android:layout_marginLeft="28dp"
+        android:text="Hora Fim :"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv1" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_HoraInicio" />
 
     <TextView
-        android:id="@+id/tv3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
-        android:text="TextView"
+        android:id="@+id/textView6"
+        android:layout_width="140dp"
+        android:layout_height="20dp"
+        android:layout_margin="28dp"
+        android:layout_marginLeft="28dp"
+        android:text="Descrição :"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
-        android:id="@+id/tv4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
-        android:text="TextView"
+        android:id="@+id/textView7"
+        android:layout_width="140dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="28dp"
+        android:text="Nome Organizador :"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-    <TextView
-        android:id="@+id/tv5"
+    <Button
+        android:id="@+id/btn_voltar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv4" />
+        android:layout_marginLeft="28dp"
+        android:layout_marginBottom="28dp"
+        android:text="Voltar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/tv6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv5" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
