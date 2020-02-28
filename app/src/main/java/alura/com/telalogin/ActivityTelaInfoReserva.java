@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,6 +16,10 @@ public class ActivityTelaInfoReserva extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tela_info_reserva);
 
@@ -36,12 +41,12 @@ public class ActivityTelaInfoReserva extends AppCompatActivity {
         TextView descricao = findViewById(R.id.tv_descricoes);
         descricao.setText(reserva.getDescricao());
 
-        Button btnVoltar = (Button) findViewById(R.id.btn_voltar);
-        btnVoltar.setOnClickListener((new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent it = new Intent(ActivityTelaInfoReserva.this, ActivityTelaPrincipal.class);
-                startActivity(it);
-            }
-        }));
     }
+    public boolean onOptionsItemSelected(MenuItem item){
+        if (item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

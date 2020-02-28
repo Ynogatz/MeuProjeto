@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -29,6 +30,9 @@ import java.util.Date;
 import alura.com.services.CadastroReservaService;
 
 public class ActivityReservarSala extends AppCompatActivity {
+
+
+
     SharedPreferences prefs;
     int idSala;
     Button botaoConfirma;
@@ -37,19 +41,14 @@ public class ActivityReservarSala extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tela_reservar_sala);
         Button dateButton = findViewById(R.id.btn_selecionar_data);
         Button timeButtonInicio = findViewById(R.id.btn_selecionar_horario_inicio);
         Button timeButtonFim = findViewById(R.id.btn_selecionar_horario_fim);
         final EditText etDescricao = findViewById(R.id.et_descricao);
-        Button botaoVoltar = findViewById(R.id.btnRegistrar);
-        botaoVoltar.setOnClickListener((new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent it = new Intent(ActivityReservarSala.this, ActivityTelaPrincipal.class);
-                startActivity(it);
-            }
-        }));
 
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,6 +133,13 @@ public class ActivityReservarSala extends AppCompatActivity {
             }
         });
 
+
+    }
+    public boolean onOptionsItemSelected(MenuItem item){
+        if (item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void handleDateButton() {
@@ -222,5 +228,4 @@ public class ActivityReservarSala extends AppCompatActivity {
         }, HOUR, MINUTE, true);
         timePickerDialog.show();
     }
-
 }

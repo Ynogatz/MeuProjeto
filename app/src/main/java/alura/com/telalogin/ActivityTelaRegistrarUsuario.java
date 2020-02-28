@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,13 +35,15 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tela_registrar_usuario);
         final EditText entradaNome = findViewById(R.id.etEntradaNomeUsuario);
         final EditText entradaEmail = findViewById(R.id.etEntradaemail);
         final EditText entradaSenha = findViewById(R.id.etEntradasenha);
         final Button botaoFinalizarCadastro = findViewById(R.id.btnFinalizarCadastro);
-        final Spinner spinner = findViewById(R.id.spinnerEmpresa);
+        final Spinner spinner = findViewById(R.id.spnEmpresa);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -51,13 +54,7 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        Button botaoVoltar = findViewById(R.id.btnRegistrar);
-        botaoVoltar.setOnClickListener((new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent it = new Intent(ActivityTelaRegistrarUsuario.this, ActivityTelaLogin.class);
-                startActivity(it);
-            }
-        }));
+
 
         botaoFinalizarCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,13 +73,9 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
                 JSONObject usuarioJson = new JSONObject();
 
                 try {
-                    String nomeString = entradaNome.getText().toString();
-                    String emailString = entradaEmail.getText().toString();
-                    String senhaString = entradaSenha.getText().toString();
-
-                    usuarioJson.put("email", emailString);
-                    usuarioJson.put("nome", nomeString);
-                    usuarioJson.put("senha", senhaString);
+                    usuarioJson.put("email", emailStr);
+                    usuarioJson.put("nome", nomeStr);
+                    usuarioJson.put("senha", senhaStr);
                     usuarioJson.put("idOrganizacao", idOrganizacaoSelecionada);
 
                     String userCod = new String(Base64.encodeToString(usuarioJson.toString().getBytes("UTF-8"), Base64.NO_WRAP));
@@ -137,6 +130,13 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
             }
         });
     }
+    public boolean onOptionsItemSelected(MenuItem item){
+        if (item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     public void parseOrganizacoesArray(String organizacoesString, Spinner spinner) {
         try {

@@ -5,6 +5,8 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -46,10 +48,11 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
         setContentView(R.layout.tela_sala);
         final List<String> listaDeReservas = new ArrayList<>();
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Intent it = getIntent();
-
         sala = (Sala) it.getSerializableExtra("sala");
-
         TextView nome = findViewById(R.id.tv_nome_sala);
         nome.setText(sala.getNome());
 
@@ -75,15 +78,6 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
         } else {
             possuiMultimidia.setText("Não definido");
         }
-
-
-        Button botaoVoltar = findViewById(R.id.btn_voltar);
-        botaoVoltar.setOnClickListener((new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent it = new Intent(ActivityTelaSala.this, ActivityTelaPrincipal.class);
-                startActivity(it);
-            }
-        }));
 
         FloatingActionButton fabSelecionarDia = findViewById(R.id.fab_adicionar_reserva);
         fabSelecionarDia.setOnClickListener(new View.OnClickListener() {
@@ -219,6 +213,13 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        if (item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 
