@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
 import android.widget.AdapterView;
@@ -61,13 +62,24 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
         botaoFinalizarCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String nomeStr = entradaNome.getText().toString().trim();
+                String emailStr = entradaEmail.getText().toString().trim();
+                String senhaStr = entradaSenha.getText().toString().trim();
 
+                if (TextUtils.isEmpty(nomeStr))
+                    entradaNome.setError("o campo nome é obrigatorio");
+                else if (TextUtils.isEmpty(emailStr))
+                    entradaEmail.setError("o campo email é obrigatorio");
+                else if (TextUtils.isEmpty(senhaStr))
+                    entradaSenha.setError("o campo senha é obrigatorio");
+                else {
                 JSONObject usuarioJson = new JSONObject();
 
                 try {
                     String nomeString = entradaNome.getText().toString();
                     String emailString = entradaEmail.getText().toString();
                     String senhaString = entradaSenha.getText().toString();
+
                     usuarioJson.put("email", emailString);
                     usuarioJson.put("nome", nomeString);
                     usuarioJson.put("senha", senhaString);
@@ -90,7 +102,7 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
                 Intent it = new Intent(ActivityTelaRegistrarUsuario.this, ActivityTelaLogin.class);
                 startActivity(it);
                 finish();
-            }
+            }}
         });
         entradaEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override

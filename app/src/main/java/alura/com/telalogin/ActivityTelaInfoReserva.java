@@ -16,7 +16,7 @@ public class ActivityTelaInfoReserva extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info_reserva);
+        setContentView(R.layout.tela_info_reserva);
 
         Intent it = getIntent();
 
