@@ -100,7 +100,6 @@ public class ActivityReservarSala extends AppCompatActivity {
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-
                     JSONObject reservaJson = new JSONObject();
                     try {
                         int usuarioId = userId;
@@ -113,12 +112,15 @@ public class ActivityReservarSala extends AppCompatActivity {
                         reservaJson.put("data_hora_inicio", dateInicioEpoch - 10800000);
                         reservaJson.put("data_hora_fim", dateFimEpoch - 10800000);
 
-                        if (dateInicioEpoch >= dateFimEpoch){
+                        if (dateInicioEpoch >= dateFimEpoch) {
                             Toast.makeText(ActivityReservarSala.this, "Hora de inicio não pode ser maior que a hora de fim", Toast.LENGTH_SHORT).show();
                         } else {
-                        String reservaCod = new String(Base64.encodeToString(reservaJson.toString().getBytes("UTF-8"), Base64.NO_WRAP));
-                        Toast.makeText(ActivityReservarSala.this, new CadastroReservaService().execute(reservaCod).get(), Toast.LENGTH_SHORT).show();
-                    }} catch (
+                            String reservaCod = new String(Base64.encodeToString(reservaJson.toString().getBytes("UTF-8"), Base64.NO_WRAP));
+                            Toast.makeText(ActivityReservarSala.this, new CadastroReservaService().execute(reservaCod).get(), Toast.LENGTH_SHORT).show();
+                            Intent it = new Intent(ActivityReservarSala.this, ActivityTelaPrincipal.class);
+                            startActivity(it);
+                        }
+                    } catch (
                             JSONException e) {
                         e.printStackTrace();
                     } catch (
@@ -147,9 +149,9 @@ public class ActivityReservarSala extends AppCompatActivity {
                 String monthStr;
                 String dateStr;
                 if (month < 10) {
-                    monthStr = "0" + (month+1);
+                    monthStr = "0" + (month + 1);
                 } else {
-                    monthStr = String.valueOf(month+1);
+                    monthStr = String.valueOf(month + 1);
                 }
                 if (date < 10) {
                     dateStr = "0" + (date);

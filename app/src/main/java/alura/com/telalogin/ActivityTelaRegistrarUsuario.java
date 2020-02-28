@@ -88,6 +88,8 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
                     String userCod = new String(Base64.encodeToString(usuarioJson.toString().getBytes("UTF-8"), Base64.NO_WRAP));
 
                     Toast.makeText(ActivityTelaRegistrarUsuario.this, new RegistrarService().execute(userCod).get(), Toast.LENGTH_SHORT).show();
+                    Intent it = new Intent(ActivityTelaRegistrarUsuario.this, ActivityTelaLogin.class);
+                    startActivity(it);
 
                 } catch (
                         JSONException e) {
@@ -97,11 +99,8 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
                     e.printStackTrace();
                 } catch (
                         Exception e) {
-
                 }
-                Intent it = new Intent(ActivityTelaRegistrarUsuario.this, ActivityTelaLogin.class);
-                startActivity(it);
-                finish();
+                    finish();
             }}
         });
         entradaEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
