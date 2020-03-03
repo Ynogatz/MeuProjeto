@@ -35,6 +35,7 @@ public class ActivityTelaPrincipal extends AppCompatActivity {
         setContentView(R.layout.tela_principal);
         prefs = getSharedPreferences("USER_DATA", Context.MODE_PRIVATE);
 
+
         ListView listview = findViewById(R.id.listview_lista_salas);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {

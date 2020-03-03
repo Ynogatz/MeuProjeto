@@ -2,8 +2,10 @@ package alura.com.telalogin;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,15 +40,17 @@ import static java.lang.Boolean.TRUE;
 
 public class ActivityTelaSala extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     Sala sala = new Sala();
+    int idUsuario;
     Reserva reserva = new Reserva();
     List<Reserva> listaDeObjetosReserva = new ArrayList<>();
     ListView listview_descricoes;
-
+    SharedPreferences prefs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tela_sala);
         final List<String> listaDeReservas = new ArrayList<>();
+        prefs = getSharedPreferences("USER_DATA", Context.MODE_PRIVATE);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -99,7 +103,7 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
                     if (obj.has("idSala") && obj.has("idUsuario") && obj.has("dataHoraInicio") && obj.has("dataHoraFim") && obj.has("nomeOrganizador")) {
                         int id = obj.getInt("id");
                         int idSala = obj.getInt("idSala");
-                        int idUsuario = obj.getInt("idUsuario");
+                        idUsuario = obj.getInt("idUsuario");
                         String descricao = obj.getString("descricao");
                         String dataHoraInicio = obj.getString("dataHoraInicio");
                         String dataHoraFim = obj.getString("dataHoraFim");
@@ -162,7 +166,11 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
                 public boolean onItemLongClick(AdapterView<?> arg0, View v,
                                                int index, long arg3) {
                     final int i = index;
-                    if (1 == 1) {
+                    System.out.println("usuario id " + idUsuario);
+                    int userId = Integer.parseInt(prefs.getString("userId", null));
+
+
+                    if (listaDeObjetosReserva.get(index).getIdUsuario() == userId) {
                         AlertDialog.Builder mensagem = new AlertDialog.Builder(ActivityTelaSala.this);
                         mensagem.setTitle("Cancelar reserva");
                         mensagem.setMessage("Tem certeza que deseja cancelar esta reserva?");
