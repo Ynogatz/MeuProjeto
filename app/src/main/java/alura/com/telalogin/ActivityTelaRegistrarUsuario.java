@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +41,7 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tela_registrar_usuario);
+//        final TextInputLayout entradaNome = findViewById(R.id.etEntradaNomeUsuario);
         final EditText entradaNome = findViewById(R.id.etEntradaNomeUsuario);
         final EditText entradaEmail = findViewById(R.id.etEntradaemail);
         final EditText entradaSenha = findViewById(R.id.etEntradasenha);
@@ -110,8 +113,9 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
                                     String listaOrganizacao = new OrganizacaoService().execute(dominio).get();
                                     System.out.println("dominio: " + dominio);
                                     System.out.println("organizacoes retornadas " + listaOrganizacao);
-                                    if (listaOrganizacao.length() == 0) {
-                                        Toast.makeText(ActivityTelaRegistrarUsuario.this, "O dominio do email informado nao faz parte de nenhuma organizacao", Toast.LENGTH_SHORT).show();
+                                    if (listaOrganizacao.length() <= 2) {
+                                        spinner.setVisibility(View.GONE);
+                                        entradaEmail.setError("Nenhuma empresa foi encontrada com o dominio informado.");
                                     } else {
                                         parseOrganizacoesArray(listaOrganizacao, spinner);
                                     }
@@ -139,6 +143,8 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
 
     public void parseOrganizacoesArray(String organizacoesString, Spinner spinner) {
         try {
+            listaDeNomesOrganizacoes.clear();
+            listaDeOrganizacoes.clear();
             JSONArray jsonArray = new JSONArray(organizacoesString);
             if (jsonArray.length() > 0) {
                 for (int i = 0; i < jsonArray.length(); i++) {

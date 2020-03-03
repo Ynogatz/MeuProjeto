@@ -4,28 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="28dp"
     tools:context=".ActivityTelaRegistrarUsuario"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
 
 
     <TextView
         android:id="@+id/tvCadastreSeuUsuario"
-        android:layout_width="match_parent"
-        android:layout_height="28dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginRight="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Cadastrar Usuário"
         android:textSize="24dp"
         app:layout_constraintStart_toStartOf="@+id/etEntradaemail"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/dsadadsada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:imeOptions="actionDone"
+        android:inputType="textPersonName" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_nome"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nome"
+
+        android:layout_marginBottom="8dp"
+        app:boxCornerRadiusBottomEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusTopStart="8dp">
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
 
     <EditText
         android:id="@+id/etEntradaNomeUsuario"
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:layout_marginTop="28dp"
-        android:background="#19000000"
+        android:background="#FFE183"
         android:ems="10"
         android:hint="Digite seu nome"
         android:inputType="textPersonName"
@@ -67,6 +92,7 @@
         android:layout_height="38dp"
         android:layout_marginTop="28dp"
         android:background="#19000000"
+        android:visibility="gone"
         android:hint="Selecione sua empresa"
         android:imeOptions="actionNext" />
 
@@ -78,6 +104,8 @@
         android:text="Finalizar Cadastro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+
 
 
 </LinearLayout>

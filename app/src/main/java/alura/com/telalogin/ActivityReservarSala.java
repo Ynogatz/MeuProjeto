@@ -112,7 +112,7 @@ public class ActivityReservarSala extends AppCompatActivity {
                         reservaJson.put("data_hora_fim", dateFimEpoch - 10800000);
 
                         if (dateInicioEpoch >= dateFimEpoch) {
-                            Toast.makeText(ActivityReservarSala.this, "Hora de inicio não pode ser maior que a hora de fim", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityReservarSala.this, "Hora de inicio não pode ser maior ou igual que a hora de fim", Toast.LENGTH_SHORT).show();
                         } else {
                             String reservaCod = new String(Base64.encodeToString(reservaJson.toString().getBytes("UTF-8"), Base64.NO_WRAP));
                             Toast.makeText(ActivityReservarSala.this, new CadastroReservaService().execute(reservaCod).get(), Toast.LENGTH_SHORT).show();

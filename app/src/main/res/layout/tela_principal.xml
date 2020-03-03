@@ -20,9 +20,9 @@
 
     <ListView
         android:id="@+id/listview_lista_salas"
-        android:layout_width="409dp"
-        android:layout_height="653dp"
-        tools:layout_editor_absoluteX="1dp"
+        android:layout_width="412dp"
+        android:layout_height="589dp"
+        tools:layout_editor_absoluteX="-2dp"
         tools:layout_editor_absoluteY="1dp" />
 
 

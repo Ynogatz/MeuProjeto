@@ -41,7 +41,6 @@ import static java.lang.Boolean.TRUE;
 public class ActivityTelaSala extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     Sala sala = new Sala();
     int idUsuario;
-    Reserva reserva = new Reserva();
     List<Reserva> listaDeObjetosReserva = new ArrayList<>();
     ListView listview_descricoes;
     SharedPreferences prefs;
