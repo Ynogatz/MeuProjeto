@@ -7,12 +7,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -37,8 +35,8 @@ import alura.com.services.ReservaService;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
-
 public class ActivityTelaSala extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+
     Sala sala = new Sala();
     int idUsuario;
     List<Reserva> listaDeObjetosReserva = new ArrayList<>();
