@@ -17,7 +17,8 @@
         android:layout_height="wrap_content"
         android:text="Cadastrar Usuário"
         android:textSize="24dp"
-        app:layout_constraintStart_toStartOf="@+id/etEntradaemail"
+        android:layout_margin="8dp"
+        app:layout_constraintStart_toStartOf="@+id/et_nome"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout

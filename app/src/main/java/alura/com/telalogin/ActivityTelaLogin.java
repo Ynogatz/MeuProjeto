@@ -12,15 +12,19 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
 import org.json.JSONObject;
 
 import alura.com.services.LoginService;
 
 public class ActivityTelaLogin extends AppCompatActivity {
     SharedPreferences prefs;
-
+    TextInputLayout entradaEmail, entradaSenha;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         prefs = getSharedPreferences("USER_DATA", Context.MODE_PRIVATE);
 
@@ -44,10 +48,10 @@ public class ActivityTelaLogin extends AppCompatActivity {
         botaoEntrar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
-                    final EditText entradaEmail = findViewById(R.id.etLogin);
-                    final EditText entradaSenha = findViewById(R.id.etSenha);
-                    String emailString = entradaEmail.getText().toString().trim();
-                    String senhaString = entradaSenha.getText().toString().trim();
+                    entradaEmail = findViewById(R.id.et_email);
+                    entradaSenha = findViewById(R.id.et_senha);
+                    String emailString = entradaEmail.getEditText().getText().toString().trim();
+                    String senhaString = entradaSenha.getEditText().getText().toString().trim();
 
                     if (TextUtils.isEmpty(emailString))
                         entradaEmail.setError("o campo email é obrigatorio");
@@ -93,7 +97,6 @@ public class ActivityTelaLogin extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
         });
     }
