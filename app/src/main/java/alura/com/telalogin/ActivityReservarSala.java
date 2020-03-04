@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,15 +32,12 @@ import java.util.Date;
 import alura.com.services.CadastroReservaService;
 
 public class ActivityReservarSala extends AppCompatActivity {
-
-
-
     SharedPreferences prefs;
     int idSala;
     Button botaoConfirma;
     String anoMesDia, horaMinutoInicio, horaMinutoFim, dateStrInicio, dateStrFim, descricao;
     Long dateInicioEpoch, dateFimEpoch;
-
+    TextView data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -48,7 +47,7 @@ public class ActivityReservarSala extends AppCompatActivity {
         Button dateButton = findViewById(R.id.btn_selecionar_data);
         Button timeButtonInicio = findViewById(R.id.btn_selecionar_horario_inicio);
         Button timeButtonFim = findViewById(R.id.btn_selecionar_horario_fim);
-        final EditText etDescricao = findViewById(R.id.et_descricao);
+        final TextInputLayout etDescricao = findViewById(R.id.et_descricao);
 
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,16 +69,18 @@ public class ActivityReservarSala extends AppCompatActivity {
         });
         botaoConfirma = findViewById(R.id.btn_confirma);
 
+
+
         botaoConfirma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 idSala = getIntent().getIntExtra("idSala", 0);
                 prefs = getSharedPreferences("USER_DATA", Context.MODE_PRIVATE);
                 int userId = Integer.parseInt(prefs.getString("userId", null));
-                if (etDescricao.getText().length() < 1) {
+                if (etDescricao.getEditText().getText().length() < 1) {
                     Toast.makeText(ActivityReservarSala.this, "Descricao deve ser preenchida", Toast.LENGTH_SHORT).show();
                 } else {
-                    descricao = etDescricao.getText().toString();
+                    descricao = etDescricao.getEditText().getText().toString();
                 }
                 if (anoMesDia == null) {
                     Toast.makeText(ActivityReservarSala.this, "selecione a data", Toast.LENGTH_SHORT).show();
@@ -133,7 +134,6 @@ public class ActivityReservarSala extends AppCompatActivity {
             }
         });
 
-
     }
     public boolean onOptionsItemSelected(MenuItem item){
         if (item.getItemId() == android.R.id.home){
@@ -150,7 +150,7 @@ public class ActivityReservarSala extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int date) {
-                TextView data = findViewById(R.id.tv_visualizar_data);
+                data = findViewById(R.id.tv_visualizar_data);
                 final String dateString = "Ano: " + year + " Mês " + (month + 1) + " Dia " + date;
                 String monthStr;
                 String dateStr;
@@ -169,6 +169,7 @@ public class ActivityReservarSala extends AppCompatActivity {
             }
         }, YEAR, MONTH, DATE);
         datePickerDialog.show();
+
     }
 
     private void handleTimeButtonInicio() {

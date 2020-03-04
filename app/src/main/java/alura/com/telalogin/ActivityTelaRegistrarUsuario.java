@@ -135,8 +135,6 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
                                         botaoFinalizarCadastro.setEnabled(false);
                                     } else {
                                         parseOrganizacoesArray(listaOrganizacao, spinner);
-
-
                                     }
                                 } catch (ExecutionException e) {
                                     e.printStackTrace();
@@ -152,15 +150,12 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
             }
         });
     }
-
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);
     }
-
-
     public void parseOrganizacoesArray(String organizacoesString, Spinner spinner) {
         try {
             listaDeNomesOrganizacoes.clear();
@@ -170,9 +165,7 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
                 listaDeNomesOrganizacoes.add("Selecione a sua organização");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject obj = jsonArray.getJSONObject(i);
-
                     if (obj.has("id") && obj.has("nome") && obj.has("tipoOrganizacao")) {
-
                         int id = obj.getInt("id");
                         String nome = obj.getString("nome");
                         String tipoOrganizacao = obj.getString("tipoOrganizacao");
@@ -180,11 +173,8 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
                         novaOrganizacao.setId(id);
                         novaOrganizacao.setNome(nome);
                         novaOrganizacao.setTipoOrganizacao(tipoOrganizacao);
-
                         listaDeOrganizacoes.add(novaOrganizacao);
                         listaDeNomesOrganizacoes.add(novaOrganizacao.getNome() + " - " + novaOrganizacao.getTipoOrganizacao());
-
-
                     }
                 }
                 if (listaDeOrganizacoes.size() == 1) {
@@ -197,10 +187,8 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
                     spinner.setAdapter(adapter);
                     emailTextInput.setErrorEnabled(false);
                     spinner.setVisibility(View.VISIBLE);
-
                 }
             }
-
         } catch (
                 Exception e) {
             e.printStackTrace();
