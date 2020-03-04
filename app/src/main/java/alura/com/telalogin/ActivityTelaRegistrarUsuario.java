@@ -1,7 +1,5 @@
 package alura.com.telalogin;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,9 +9,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -26,14 +25,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import alura.com.services.RegistrarService;
-import alura.com.services.OrganizacaoService;
 import alura.com.modelo.Organizacao;
+import alura.com.services.OrganizacaoService;
+import alura.com.services.RegistrarService;
 
 public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
     List<Organizacao> listaDeOrganizacoes = new ArrayList();
     List<String> listaDeNomesOrganizacoes = new ArrayList<>();
     int idOrganizacaoSelecionada;
+    TextInputLayout nomeTextInput, emailTextInput, senhaTextInput;
+    String nome, senha, email;
+    Button botaoFinalizarCadastro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +43,21 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tela_registrar_usuario);
-//        final TextInputLayout entradaNome = findViewById(R.id.etEntradaNomeUsuario);
-        final EditText entradaNome = findViewById(R.id.etEntradaNomeUsuario);
-        final EditText entradaEmail = findViewById(R.id.etEntradaemail);
-        final EditText entradaSenha = findViewById(R.id.etEntradasenha);
-        final Button botaoFinalizarCadastro = findViewById(R.id.btnFinalizarCadastro);
+        botaoFinalizarCadastro = findViewById(R.id.btnFinalizarCadastro);
         final Spinner spinner = findViewById(R.id.spnEmpresa);
+        nomeTextInput = findViewById(R.id.et_nome);
+        emailTextInput = findViewById(R.id.et_email);
+        senhaTextInput = findViewById(R.id.et_senha);
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                idOrganizacaoSelecionada = listaDeOrganizacoes.get(position).getId();
+                if(position != 0) {
+                    idOrganizacaoSelecionada = listaDeOrganizacoes.get(position - 1).getId();
+                    botaoFinalizarCadastro.setEnabled(true);
+                } else {
+                    botaoFinalizarCadastro.setEnabled(false);
+                }
             }
 
             @Override
@@ -62,48 +69,57 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
         botaoFinalizarCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nomeStr = entradaNome.getText().toString().trim();
-                String emailStr = entradaEmail.getText().toString().trim();
-                String senhaStr = entradaSenha.getText().toString().trim();
+                nome = nomeTextInput.getEditText().getText().toString();
+                email = emailTextInput.getEditText().getText().toString().trim();
+                senha = senhaTextInput.getEditText().getText().toString().trim();
 
-                if (TextUtils.isEmpty(nomeStr))
-                    entradaNome.setError("o campo nome é obrigatorio");
-                else if (TextUtils.isEmpty(emailStr))
-                    entradaEmail.setError("o campo email é obrigatorio");
-                else if (TextUtils.isEmpty(senhaStr))
-                    entradaSenha.setError("o campo senha é obrigatorio");
-                else {
-                JSONObject usuarioJson = new JSONObject();
 
-                try {
-                    usuarioJson.put("email", emailStr);
-                    usuarioJson.put("nome", nomeStr);
-                    usuarioJson.put("senha", senhaStr);
-                    usuarioJson.put("idOrganizacao", idOrganizacaoSelecionada);
+                if (TextUtils.isEmpty(nome))
+                    nomeTextInput.setError("o campo nome é obrigatorio");
+                else if (TextUtils.isEmpty(email)) {
+                    emailTextInput.setError("o campo email é obrigatorio");
+                    nomeTextInput.setErrorEnabled(false);
+                } else if (TextUtils.isEmpty(senha)) {
+                    senhaTextInput.setError("o campo senha é obrigatorio");
+                    nomeTextInput.setErrorEnabled(false);
+                    emailTextInput.setErrorEnabled(false);
+                } else {
+                    nomeTextInput.setErrorEnabled(false);
+                    emailTextInput.setErrorEnabled(false);
+                    senhaTextInput.setErrorEnabled(false);
 
-                    String userCod = (Base64.encodeToString(usuarioJson.toString().getBytes("UTF-8"), Base64.NO_WRAP));
+                    JSONObject usuarioJson = new JSONObject();
 
-                    Toast.makeText(ActivityTelaRegistrarUsuario.this, new RegistrarService().execute(userCod).get(), Toast.LENGTH_SHORT).show();
-                    Intent it = new Intent(ActivityTelaRegistrarUsuario.this, ActivityTelaLogin.class);
-                    startActivity(it);
+                    try {
+                        usuarioJson.put("email", email);
+                        usuarioJson.put("nome", nome);
+                        usuarioJson.put("senha", senha);
+                        usuarioJson.put("idOrganizacao", idOrganizacaoSelecionada);
 
-                } catch (
-                        JSONException e) {
-                    e.printStackTrace();
-                } catch (
-                        UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                } catch (
-                        Exception e) {
-                }
+                        String userCod = (Base64.encodeToString(usuarioJson.toString().getBytes("UTF-8"), Base64.NO_WRAP));
+
+                        Toast.makeText(ActivityTelaRegistrarUsuario.this, new RegistrarService().execute(userCod).get(), Toast.LENGTH_SHORT).show();
+                        Intent it = new Intent(ActivityTelaRegistrarUsuario.this, ActivityTelaLogin.class);
+                        startActivity(it);
+
+                    } catch (
+                            JSONException e) {
+                        e.printStackTrace();
+                    } catch (
+                            UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    } catch (
+                            Exception e) {
+                    }
                     finish();
-            }}
+                }
+            }
         });
-        entradaEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        emailTextInput.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    String emailAfterTextChange = entradaEmail.getText().toString();
+                    String emailAfterTextChange = emailTextInput.getEditText().getText().toString();
                     if (emailAfterTextChange.contains("@")) {
                         String[] emailCompleto = emailAfterTextChange.split("@");
                         if (emailCompleto.length > 0) {
@@ -115,9 +131,12 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
                                     System.out.println("organizacoes retornadas " + listaOrganizacao);
                                     if (listaOrganizacao.length() <= 2) {
                                         spinner.setVisibility(View.GONE);
-                                        entradaEmail.setError("Nenhuma empresa foi encontrada com o dominio informado.");
+                                        emailTextInput.setError("Nenhuma empresa foi encontrada com o dominio informado.");
+                                        botaoFinalizarCadastro.setEnabled(false);
                                     } else {
                                         parseOrganizacoesArray(listaOrganizacao, spinner);
+
+
                                     }
                                 } catch (ExecutionException e) {
                                     e.printStackTrace();
@@ -133,8 +152,9 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
             }
         });
     }
-    public boolean onOptionsItemSelected(MenuItem item){
-        if (item.getItemId() == android.R.id.home){
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);
@@ -147,6 +167,7 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
             listaDeOrganizacoes.clear();
             JSONArray jsonArray = new JSONArray(organizacoesString);
             if (jsonArray.length() > 0) {
+                listaDeNomesOrganizacoes.add("Selecione a sua organização");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject obj = jsonArray.getJSONObject(i);
 
@@ -163,15 +184,25 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
                         listaDeOrganizacoes.add(novaOrganizacao);
                         listaDeNomesOrganizacoes.add(novaOrganizacao.getNome() + " - " + novaOrganizacao.getTipoOrganizacao());
 
-                        ArrayAdapter<String> adapter = new ArrayAdapter<>(ActivityTelaRegistrarUsuario.this, android.R.layout.simple_spinner_item, listaDeNomesOrganizacoes);
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        spinner.setAdapter(adapter);
-                        spinner.setVisibility(View.VISIBLE);
+
                     }
+                }
+                if (listaDeOrganizacoes.size() == 1) {
+                    idOrganizacaoSelecionada = listaDeOrganizacoes.get(0).getId();
+                    botaoFinalizarCadastro.setEnabled(true);
+                    spinner.setVisibility(View.GONE);
+                } else {
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(ActivityTelaRegistrarUsuario.this, android.R.layout.simple_spinner_item, listaDeNomesOrganizacoes);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner.setAdapter(adapter);
+                    emailTextInput.setErrorEnabled(false);
+                    spinner.setVisibility(View.VISIBLE);
+
                 }
             }
 
-        } catch (Exception e) {
+        } catch (
+                Exception e) {
             e.printStackTrace();
         }
     }

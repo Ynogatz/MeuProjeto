@@ -10,6 +10,7 @@
     android:orientation="vertical">
 
 
+
     <TextView
         android:id="@+id/tvCadastreSeuUsuario"
         android:layout_width="wrap_content"
@@ -18,13 +19,6 @@
         android:textSize="24dp"
         app:layout_constraintStart_toStartOf="@+id/etEntradaemail"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/dsadadsada"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:imeOptions="actionDone"
-        android:inputType="textPersonName" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/et_nome"
@@ -39,73 +33,76 @@
         app:boxCornerRadiusTopEnd="8dp"
         app:boxCornerRadiusTopStart="8dp">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:imeOptions="actionDone"
+            android:inputType="textPersonName"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_email"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="E-mail"
+
+        android:layout_marginBottom="8dp"
+        app:boxCornerRadiusBottomEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusTopStart="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:imeOptions="actionDone"
+            android:inputType="textPersonName"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_senha"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Senha"
+
+        android:layout_marginBottom="8dp"
+        app:boxCornerRadiusBottomEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusTopStart="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:imeOptions="actionDone"
+            android:inputType="textPersonName"
+            android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
-
-
-
-    <EditText
-        android:id="@+id/etEntradaNomeUsuario"
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:layout_marginTop="28dp"
-        android:background="#FFE183"
-        android:ems="10"
-        android:hint="Digite seu nome"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/tvCadastreSeuUsuario"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCadastreSeuUsuario" />
-
-    <EditText
-        android:id="@+id/etEntradaemail"
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:layout_marginTop="28dp"
-        android:background="#19000000"
-        android:ems="10"
-        android:hint="Digite o e-mail"
-        android:inputType="textEmailAddress"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEntradaNomeUsuario" />
-
-
-    <EditText
-        android:id="@+id/etEntradasenha"
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:layout_marginTop="28dp"
-        android:background="#19000000"
-        android:ems="10"
-        android:hint="Digite sua senha"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/etEntradaemail"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEntradaemail" />
-
     <Spinner
         android:id="@+id/spnEmpresa"
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:layout_marginTop="28dp"
-        android:background="#19000000"
         android:visibility="gone"
-        android:hint="Selecione sua empresa"
-        android:imeOptions="actionNext" />
-
-    <Button
-        android:id="@+id/btnFinalizarCadastro"
+        android:imeOptions="actionNext"
+        android:background="@drawable/spinner_background"
+        android:popupElevation="3dp"
+        android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginTop="28dp"
-        android:text="Finalizar Cadastro"
+        android:layout_height="50dp" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnFinalizarCadastro"
+        android:enabled="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Cadastrar"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+        app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-
 
 
 </LinearLayout>
