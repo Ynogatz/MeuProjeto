@@ -38,6 +38,7 @@
     <Button
         android:id="@+id/btn_confirma"
         android:layout_width="match_parent"
+        android:enabled="false"
         android:layout_height="wrap_content"
         android:text="Confirmar"
         app:layout_constraintBottom_toBottomOf="parent"

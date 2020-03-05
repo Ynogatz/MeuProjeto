@@ -31,6 +31,9 @@ import java.util.Date;
 
 import alura.com.services.CadastroReservaService;
 
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+
 public class ActivityReservarSala extends AppCompatActivity {
     SharedPreferences prefs;
     int idSala;
@@ -38,6 +41,7 @@ public class ActivityReservarSala extends AppCompatActivity {
     String anoMesDia, horaMinutoInicio, horaMinutoFim, dateStrInicio, dateStrFim, descricao;
     Long dateInicioEpoch, dateFimEpoch;
     TextView data;
+    boolean horaInicio = FALSE, horaFim = FALSE, dia = FALSE, desc = FALSE;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -77,11 +81,6 @@ public class ActivityReservarSala extends AppCompatActivity {
                 idSala = getIntent().getIntExtra("idSala", 0);
                 prefs = getSharedPreferences("USER_DATA", Context.MODE_PRIVATE);
                 int userId = Integer.parseInt(prefs.getString("userId", null));
-                if (etDescricao.getEditText().getText().length() < 1) {
-                    Toast.makeText(ActivityReservarSala.this, "Descricao deve ser preenchida", Toast.LENGTH_SHORT).show();
-                } else {
-                    descricao = etDescricao.getEditText().getText().toString();
-                }
                 if (anoMesDia == null) {
                     Toast.makeText(ActivityReservarSala.this, "selecione a data", Toast.LENGTH_SHORT).show();
                 } else if (horaMinutoInicio == null) {
@@ -91,7 +90,11 @@ public class ActivityReservarSala extends AppCompatActivity {
                 } else {
                     dateStrInicio = (anoMesDia + " " + horaMinutoInicio);
                     dateStrFim = (anoMesDia + " " + horaMinutoFim);
-
+                    descricao = etDescricao.getEditText().getText().toString();
+                    if (descricao.length() <= 1){
+                        descricao = "Nenhuma descrição ";
+                    }
+                    dia = TRUE;
                     try {
                         Date dateInicio = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(dateStrInicio);
                         dateInicioEpoch = dateInicio.getTime();
@@ -166,6 +169,9 @@ public class ActivityReservarSala extends AppCompatActivity {
                 }
                 anoMesDia = (dateStr + "/" + monthStr + "/" + year);
                 data.setText(dateString);
+                if (dateString.length() > 5){
+                    dia = TRUE;
+                }
             }
         }, YEAR, MONTH, DATE);
         datePickerDialog.show();
@@ -195,7 +201,9 @@ public class ActivityReservarSala extends AppCompatActivity {
                 final String timeString = "Horario Inicio :" + hour + ":" + minute;
                 horaMinutoInicio = (hourStr + ":" + minuteStr);
                 horario.setText(timeString);
-
+                if (timeString.length() > 5){
+                    horaInicio = TRUE;
+                }
             }
         }, HOUR, MINUTE, true);
         timePickerDialog.show();
@@ -224,9 +232,15 @@ public class ActivityReservarSala extends AppCompatActivity {
                 final String timeString = "Horario Fim :" + hour + ":" + minute;
                 horaMinutoFim = (hourStr + ":" + minuteStr);
                 horario.setText(timeString);
-
+                if (timeString.length() > 5){
+                    horaFim = TRUE;
+                }
             }
         }, HOUR, MINUTE, true);
         timePickerDialog.show();
+
+        if (horaInicio && horaInicio && dia){
+            botaoConfirma.setEnabled(TRUE);
+        }
     }
 }
