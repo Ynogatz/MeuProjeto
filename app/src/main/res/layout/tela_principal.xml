@@ -20,10 +20,10 @@
 
     <ListView
         android:id="@+id/listview_lista_salas"
-        android:layout_width="414dp"
-        android:layout_height="478dp"
-        tools:layout_editor_absoluteX="-2dp"
-        tools:layout_editor_absoluteY="1dp" />
+        android:layout_width="411dp"
+        android:layout_height="485dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogout"
+        tools:layout_editor_absoluteX="-2dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,10 +10,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,8 +20,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import alura.com.services.SalaService;
 import alura.com.modelo.Sala;
+import alura.com.services.SalaService;
 
 public class ActivityTelaPrincipal extends AppCompatActivity {
     SharedPreferences prefs;
@@ -35,9 +34,8 @@ public class ActivityTelaPrincipal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tela_principal);
         prefs = getSharedPreferences("USER_DATA", Context.MODE_PRIVATE);
-
-
         ListView listview = findViewById(R.id.listview_lista_salas);
+
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -83,7 +81,7 @@ public class ActivityTelaPrincipal extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Button botaoLogout = (Button) findViewById(R.id.btnLogout);
+        Button botaoLogout = findViewById(R.id.btnLogout);
         botaoLogout.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
                 SharedPreferences.Editor editor = prefs.edit();
@@ -100,9 +98,8 @@ public class ActivityTelaPrincipal extends AppCompatActivity {
         }));
     }
 
-
-    public boolean onOptionsItemSelected(MenuItem item){
-        if (item.getItemId() == android.R.id.home){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);
