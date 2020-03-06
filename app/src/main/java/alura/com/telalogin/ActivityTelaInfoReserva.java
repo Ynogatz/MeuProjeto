@@ -42,4 +42,11 @@ public class ActivityTelaInfoReserva extends AppCompatActivity {
         descricao.setText(reserva.getDescricao());
 
     }
+    public boolean onOptionsItemSelected(MenuItem item){
+        if (item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
+
