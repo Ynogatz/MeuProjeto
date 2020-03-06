@@ -27,6 +27,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 import alura.com.modelo.Reserva;
 import alura.com.modelo.Sala;
@@ -43,6 +44,7 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
     List<Reserva> listaDeObjetosReserva = new ArrayList<>();
     ListView listview_descricoes;
     SharedPreferences prefs;
+    SwipeRefreshLayout swipeRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -167,7 +169,6 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
                     System.out.println("usuario id " + idUsuario);
                     int userId = Integer.parseInt(prefs.getString("userId", null));
 
-
                     if (listaDeObjetosReserva.get(index).getIdUsuario() == userId) {
                         AlertDialog.Builder mensagem = new AlertDialog.Builder(ActivityTelaSala.this);
                         mensagem.setTitle("Cancelar reserva");
@@ -196,7 +197,6 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
-
                             }
                         });
                         mensagem.show();
@@ -215,6 +215,18 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
                 startActivity(it);
             }
         });
+
+        swipeRefreshLayout = findViewById(R.id.swipe_to_refresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Toast.makeText(ActivityTelaSala.this, "Atualizando...", Toast.LENGTH_SHORT).show();
+
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+
     }
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {

@@ -23,17 +23,13 @@ public class ActivityTelaLogin extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
-
         prefs = getSharedPreferences("USER_DATA", Context.MODE_PRIVATE);
 
         if (prefs.contains("userEmail")) {
             Intent it = new Intent(ActivityTelaLogin.this, ActivityTelaPrincipal.class);
             startActivity(it);
         }
-
 
         setContentView(R.layout.tela_login);
         final Button botaoEntrar = findViewById(R.id.btnEntrar);

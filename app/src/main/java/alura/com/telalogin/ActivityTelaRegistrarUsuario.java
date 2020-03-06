@@ -65,14 +65,12 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
             }
         });
 
-
         botaoFinalizarCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 nome = nomeTextInput.getEditText().getText().toString();
                 email = emailTextInput.getEditText().getText().toString().trim();
                 senha = senhaTextInput.getEditText().getText().toString().trim();
-
 
                 if (TextUtils.isEmpty(nome))
                     nomeTextInput.setError("o campo nome é obrigatorio");

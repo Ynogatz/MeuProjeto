@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -35,7 +34,6 @@ public class ActivityTelaPrincipal extends AppCompatActivity {
         setContentView(R.layout.tela_principal);
         prefs = getSharedPreferences("USER_DATA", Context.MODE_PRIVATE);
         ListView listview = findViewById(R.id.listview_lista_salas);
-
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -104,7 +102,6 @@ public class ActivityTelaPrincipal extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }
 
 
