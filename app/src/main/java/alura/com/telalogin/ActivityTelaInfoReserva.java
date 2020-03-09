@@ -1,18 +1,17 @@
 package alura.com.telalogin;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import alura.com.modelo.Reserva;
 
 public class ActivityTelaInfoReserva extends AppCompatActivity {
     Reserva reserva = new Reserva();
+    String horarioInicio, horarioFim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,20 +29,38 @@ public class ActivityTelaInfoReserva extends AppCompatActivity {
         nomeOrganizador.setText(reserva.getNomeOrganizador());
 
         reserva = (Reserva) it.getSerializableExtra("reservas");
+        String horaInicioFormatada = reserva.getDataHoraInicio();
         TextView dataHoraInicio = findViewById(R.id.tv_data_hora_inicio);
-        dataHoraInicio.setText(reserva.getDataHoraInicio());
+
+        if (horaInicioFormatada.contains("Z")) {
+            String[] horarioNaoParciado = horaInicioFormatada.split("Z");
+            if (horarioNaoParciado.length > 0) {
+                String dataEHoraRow = horarioNaoParciado[0];
+                horarioInicio = dataEHoraRow.split("T")[1];
+            }
+        }  dataHoraInicio.setText(horarioInicio);
+
 
         reserva = (Reserva) it.getSerializableExtra("reservas");
+        String horaFimFormatada = reserva.getDataHoraFim();
         TextView dataHoraFim = findViewById(R.id.tv_data_hora_fim);
-        dataHoraFim.setText(reserva.getDataHoraFim());
+
+        if (horaFimFormatada.contains("Z")) {
+            String[] horarioNaoParciado = horaFimFormatada.split("Z");
+            if (horarioNaoParciado.length > 0) {
+                String dataEHoraRow = horarioNaoParciado[0];
+                horarioFim = dataEHoraRow.split("T")[1];
+            }
+        }  dataHoraFim.setText(horarioFim);
 
         reserva = (Reserva) it.getSerializableExtra("reservas");
         TextView descricao = findViewById(R.id.tv_descricoes);
         descricao.setText(reserva.getDescricao());
 
     }
-    public boolean onOptionsItemSelected(MenuItem item){
-        if (item.getItemId() == android.R.id.home){
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);
