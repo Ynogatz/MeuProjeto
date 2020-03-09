@@ -94,8 +94,13 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
                         usuarioJson.put("idOrganizacao", idOrganizacaoSelecionada);
 
                         String userCod = (Base64.encodeToString(usuarioJson.toString().getBytes("UTF-8"), Base64.NO_WRAP));
-
-                        Toast.makeText(ActivityTelaRegistrarUsuario.this, new RegistrarService().execute(userCod).get(), Toast.LENGTH_SHORT).show();
+                        String novoRegistro = new RegistrarService().execute(userCod).get();
+                        Toast.makeText(ActivityTelaRegistrarUsuario.this, novoRegistro, Toast.LENGTH_SHORT).show();
+                        if (novoRegistro.equals("Usuário criado com sucesso")) {
+                            finish();
+                        } else {
+                        return;
+                        }
                     } catch (
                             JSONException e) {
                         e.printStackTrace();
