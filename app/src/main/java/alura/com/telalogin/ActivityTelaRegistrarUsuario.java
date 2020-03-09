@@ -1,6 +1,5 @@
 package alura.com.telalogin;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Base64;
@@ -52,7 +51,7 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position != 0) {
+                if (position != 0) {
                     idOrganizacaoSelecionada = listaDeOrganizacoes.get(position - 1).getId();
                     botaoFinalizarCadastro.setEnabled(true);
                 } else {
@@ -97,9 +96,6 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
                         String userCod = (Base64.encodeToString(usuarioJson.toString().getBytes("UTF-8"), Base64.NO_WRAP));
 
                         Toast.makeText(ActivityTelaRegistrarUsuario.this, new RegistrarService().execute(userCod).get(), Toast.LENGTH_SHORT).show();
-                        Intent it = new Intent(ActivityTelaRegistrarUsuario.this, ActivityTelaLogin.class);
-                        startActivity(it);
-
                     } catch (
                             JSONException e) {
                         e.printStackTrace();
@@ -109,7 +105,6 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
                     } catch (
                             Exception e) {
                     }
-                    finish();
                 }
             }
         });
@@ -148,12 +143,14 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
             }
         });
     }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);
     }
+
     public void parseOrganizacoesArray(String organizacoesString, Spinner spinner) {
         try {
             listaDeNomesOrganizacoes.clear();

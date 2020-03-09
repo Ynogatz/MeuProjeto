@@ -35,6 +35,7 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 public class ActivityReservarSala extends AppCompatActivity {
+    DatePickerDialog datePickerDialog;
     SharedPreferences prefs;
     int idSala;
     Button botaoConfirma;
@@ -146,11 +147,12 @@ public class ActivityReservarSala extends AppCompatActivity {
     }
 
     private void handleDateButton() {
-        Calendar calendar = Calendar.getInstance();
+
+        final Calendar calendar = Calendar.getInstance();
         final int YEAR = calendar.get(Calendar.YEAR);
         int MONTH = calendar.get(Calendar.MONTH);
         int DATE = calendar.get(Calendar.DATE);
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int date) {
                 data = findViewById(R.id.tv_visualizar_data);
@@ -169,12 +171,15 @@ public class ActivityReservarSala extends AppCompatActivity {
                 }
                 anoMesDia = (dateStr + "/" + monthStr + "/" + year);
                 data.setText(dateString);
-                if (dateString.length() > 5){
-                    dia = TRUE;
-                }
+                if (dateString.length() > 5) dia = TRUE;
+
+
             }
-        }, YEAR, MONTH, DATE);
+        }
+
+        , YEAR, MONTH, DATE);
         datePickerDialog.show();
+        datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());
 
     }
 

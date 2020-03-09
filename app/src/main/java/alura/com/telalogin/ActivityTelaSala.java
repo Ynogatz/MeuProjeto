@@ -27,7 +27,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 
 import alura.com.modelo.Reserva;
 import alura.com.modelo.Sala;
@@ -130,7 +129,6 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
                             }
                         }
 
-
                         if (dataEHoraInicio.contains("Z")) {
                             String[] horarioNaoParciado = dataEHoraInicio.split("Z");
                             if (horarioNaoParciado.length > 0) {
@@ -215,13 +213,11 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
                 startActivity(it);
             }
         });
-
         swipeRefreshLayout = findViewById(R.id.swipe_to_refresh);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 Toast.makeText(ActivityTelaSala.this, "Atualizando...", Toast.LENGTH_SHORT).show();
-
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
