@@ -156,7 +156,7 @@ public class ActivityReservarSala extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int date) {
                 data = findViewById(R.id.tv_visualizar_data);
-                final String dateString = "Ano: " + year + " Mês " + (month + 1) + " Dia " + date;
+                final String dateString = date + "/" + month + "/" + year;
                 String monthStr;
                 String dateStr;
                 if (month < 10) {
@@ -170,7 +170,7 @@ public class ActivityReservarSala extends AppCompatActivity {
                     dateStr = String.valueOf(date);
                 }
                 anoMesDia = (dateStr + "/" + monthStr + "/" + year);
-                data.setText(dateString);
+                data.setText(anoMesDia);
                 if (dateString.length() > 5) dia = TRUE;
 
 
