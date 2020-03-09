@@ -30,6 +30,8 @@ public class ActivityTelaPrincipal extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tela_principal);
         prefs = getSharedPreferences("USER_DATA", Context.MODE_PRIVATE);
@@ -79,26 +81,20 @@ public class ActivityTelaPrincipal extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Button botaoLogout = findViewById(R.id.btnLogout);
-        botaoLogout.setOnClickListener((new View.OnClickListener() {
-            public void onClick(View v) {
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.remove("userEmail");
-                editor.remove("userName");
-                editor.remove("userId");
-                editor.remove("userIdOrganizacao");
-                editor.remove("userNomeEmpresa");
-                editor.remove("userTipoEmpresa");
-                editor.commit();
-                Intent it = new Intent(ActivityTelaPrincipal.this, ActivityTelaLogin.class);
-                startActivity(it);
-            }
-        }));
-    }
-
+        }
+    
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            finish();
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.remove("userEmail");
+            editor.remove("userName");
+            editor.remove("userId");
+            editor.remove("userIdOrganizacao");
+            editor.remove("userNomeEmpresa");
+            editor.remove("userTipoEmpresa");
+            editor.commit();
+            Intent it = new Intent(ActivityTelaPrincipal.this, ActivityTelaLogin.class);
+            startActivity(it);
         }
         return super.onOptionsItemSelected(item);
     }
