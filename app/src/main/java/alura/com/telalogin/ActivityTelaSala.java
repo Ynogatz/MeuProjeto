@@ -171,12 +171,13 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
                         AlertDialog.Builder mensagem = new AlertDialog.Builder(ActivityTelaSala.this);
                         mensagem.setTitle("Cancelar reserva");
                         mensagem.setMessage("Tem certeza que deseja cancelar esta reserva?");
-                        mensagem.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                        mensagem.setNeutralButton("Não", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Toast.makeText(ActivityTelaSala.this, "Reserva não cancelada", Toast.LENGTH_SHORT).show();
                             }
                         });
+
                         mensagem.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
