@@ -99,7 +99,7 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
                         if (novoRegistro.equals("Usuário criado com sucesso")) {
                             finish();
                         } else {
-                        return;
+                            return;
                         }
                     } catch (
                             JSONException e) {
