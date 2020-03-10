@@ -76,8 +76,8 @@ public class ActivityTelaRegistrarUsuario extends AppCompatActivity {
                 else if (TextUtils.isEmpty(email)) {
                     emailTextInput.setError("o campo email é obrigatorio");
                     nomeTextInput.setErrorEnabled(false);
-                } else if (TextUtils.isEmpty(senha)) {
-                    senhaTextInput.setError("o campo senha é obrigatorio");
+                } else if (senha.length() < 5) {
+                    senhaTextInput.setError("o campo senha deve conter no minimo 5 caracteres");
                     nomeTextInput.setErrorEnabled(false);
                     emailTextInput.setErrorEnabled(false);
                 } else {

@@ -145,6 +145,7 @@ public class ActivityTelaSala extends AppCompatActivity implements DatePickerDia
                             }
                         }
                         listaDeReservas.add(anoDiaMes + "    -    " + horarioInicio + "    -    " + horarioFim);
+
                         listaDeObjetosReserva.add(novaReserva);
                     }
                 }
