@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -98,9 +97,9 @@ public class ActivityReservarSala extends AppCompatActivity {
                     dia = TRUE;
                     try {
                         Date dateInicio = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(dateStrInicio);
-                        dateInicioEpoch = dateInicio.getTime();
+                        dateInicioEpoch = dateInicio.getTime() + 7200;
                         Date dateFim = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(dateStrFim);
-                        dateFimEpoch = dateFim.getTime();
+                        dateFimEpoch = dateFim.getTime() + 7200;
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
